@@ -1,4 +1,6410 @@
 {
-  "_comment": "Beginner note: this file will become the exercise library. Each exercise will eventually describe muscles trained, equipment needed, safety flags, and a diagram path.",
-  "exercises": []
+  "_comment": "First-draft Marshall Fit exercise library. Exercises are filtered to the gym equipment catalog and organized around the workout template movement patterns. Source references identify online/local resources used to seed names, targets, and equipment categories; coaching text is original draft guidance.",
+  "schema_version": "0.1.0",
+  "online_resources": [
+    {
+      "id": "nasm_exercise_library",
+      "name": "NASM Exercise Library",
+      "url": "https://www.nasm.org/workout-exercise-guidance",
+      "notes": "Referenced for common exercise names, body-part classifications, difficulty language, and equipment categories."
+    },
+    {
+      "id": "ace_exercise_library",
+      "name": "ACE Exercise Library",
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/",
+      "notes": "Referenced for common exercise names, target body-part groupings, and accessible bodyweight/free-weight variations."
+    },
+    {
+      "id": "exrx_exercise_directory",
+      "name": "ExRx Exercise Directory",
+      "url": "https://exrx.net/Lists/Directory",
+      "notes": "Referenced for movement-family coverage and muscle/action categorization across presses, pulls, curls, extensions, squats, hinges, and accessory lifts."
+    },
+    {
+      "id": "marshallfit_equipment_catalog",
+      "name": "Marshall Fit Equipment Catalog",
+      "url": "../equipment-catalog.md",
+      "notes": "Local source of truth for equipment IDs and stations available in the gym."
+    }
+  ],
+  "movement_patterns": [
+    {
+      "id": "horizontal_push",
+      "description": "Flat/horizontal chest pressing patterns."
+    },
+    {
+      "id": "incline_push",
+      "description": "Incline chest pressing patterns biased toward upper chest."
+    },
+    {
+      "id": "vertical_push",
+      "description": "Shoulder-dominant overhead pressing patterns."
+    },
+    {
+      "id": "chest_accessory",
+      "description": "Chest fly, dip, push-up, and pump/accessory patterns."
+    },
+    {
+      "id": "triceps_isolation",
+      "description": "Elbow-extension and triceps-biased accessory patterns."
+    },
+    {
+      "id": "horizontal_pull",
+      "description": "Rows and horizontal back pulls."
+    },
+    {
+      "id": "vertical_pull",
+      "description": "Pull-ups, chin-ups, pulldowns, and straight-down lat patterns."
+    },
+    {
+      "id": "back_accessory",
+      "description": "Back/rear-delt accessory pulls and upper-back finishers."
+    },
+    {
+      "id": "shoulder_accessory",
+      "description": "Shoulder isolation and rear/lateral delt movements."
+    },
+    {
+      "id": "biceps_isolation",
+      "description": "Curl variations for biceps, brachialis, and forearms."
+    },
+    {
+      "id": "quad_compound",
+      "description": "Squat and quad-dominant compound lower-body patterns."
+    },
+    {
+      "id": "hip_hinge",
+      "description": "Deadlift, RDL, hip thrust, and hinge-dominant patterns."
+    },
+    {
+      "id": "quad_accessory",
+      "description": "Quad-focused single-leg and knee-extension accessories."
+    },
+    {
+      "id": "hamstring_accessory",
+      "description": "Hamstring curl, Nordic, and single-leg hinge accessories."
+    },
+    {
+      "id": "lower_body_accessory",
+      "description": "Glute, hip, calf, lunge, and mobility-oriented lower-body accessories."
+    },
+    {
+      "id": "core_accessory",
+      "description": "Core options available in the gym for future template expansion."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "barbell_bench_press",
+      "name": "Barbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench inside rack with safeties set just below chest height.",
+      "coaching_notes": [
+        "Use a stable arch, packed shoulders, and a controlled touch point on lower-to-mid chest."
+      ],
+      "regressions": [
+        "dumbbell_bench_press",
+        "push_up"
+      ],
+      "progressions": [
+        "paused_barbell_bench_press",
+        "close_grip_barbell_bench_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "paused_barbell_bench_press",
+      "name": "Paused Barbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat rack bench with a 1-2 second pause on the chest.",
+      "coaching_notes": [
+        "Good strength variation when load is slightly reduced."
+      ],
+      "regressions": [],
+      "progressions": [
+        "barbell_bench_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "close_grip_barbell_bench_press",
+      "name": "Close-Grip Barbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push",
+        "triceps_isolation"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "triceps",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat rack bench with hands just inside shoulder width.",
+      "coaching_notes": [
+        "Keep wrists stacked and elbows tucked without forcing an extreme narrow grip."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary",
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "dumbbell_bench_press",
+      "name": "Dumbbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat FID bench with dumbbells started from thighs or floor.",
+      "coaching_notes": [],
+      "regressions": [
+        "single_arm_dumbbell_bench_press",
+        "push_up"
+      ],
+      "progressions": [
+        "alternating_dumbbell_bench_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "single_arm_dumbbell_bench_press",
+      "name": "Single-Arm Dumbbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "core",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Flat bench; press one dumbbell while the opposite hand stays free or holds a second dumbbell at lockout.",
+      "coaching_notes": [
+        "Anti-rotation demand is higher; use less load than a two-arm press."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "alternating_dumbbell_bench_press",
+      "name": "Alternating Dumbbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hold both dumbbells over chest; alternate reps while the non-working arm stays locked out or paused low.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "neutral_grip_dumbbell_bench_press",
+      "name": "Neutral-Grip Dumbbell Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench with palms facing each other.",
+      "coaching_notes": [
+        "Often friendlier for shoulders than a flared grip."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "floor_press_barbell",
+      "name": "Barbell Floor Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "triceps",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Set J-cups low enough to unrack from the floor or use spotter arms.",
+      "coaching_notes": [
+        "Shortened range biases lockout strength."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "dumbbell_floor_press",
+      "name": "Dumbbell Floor Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "triceps",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Lie on floor; pause upper arms lightly on floor each rep.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_bench_press",
+      "name": "Smith Machine Bench Press",
+      "movement_patterns": [
+        "horizontal_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench aligned under guided Smith bar.",
+      "coaching_notes": [
+        "Useful for stable loading when training alone."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_close_grip_press",
+      "name": "Smith Close-Grip Bench Press",
+      "movement_patterns": [
+        "horizontal_push",
+        "triceps_isolation"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "triceps",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench under Smith bar, hands just inside shoulder width.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_push_primary",
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "decline_smith_machine_press",
+      "name": "Decline Smith Machine Press",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lower_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Decline FID bench under guided Smith bar if bench angle and rack clearance permit.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "push_up",
+      "name": "Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts",
+        "core"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hands on floor under shoulders; body in a straight plank.",
+      "coaching_notes": [],
+      "regressions": [
+        "incline_push_up"
+      ],
+      "progressions": [
+        "decline_push_up",
+        "weighted_push_up"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "incline_push_up",
+      "name": "Incline Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "adjustable-fid-bench",
+        "power-rack"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hands elevated on bench or rack crossmember.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "decline_push_up",
+      "name": "Decline Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "adjustable-fid-bench"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Feet elevated on bench.",
+      "coaching_notes": [
+        "Treat as an upper-chest/bodyweight press variation."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "weighted_push_up",
+      "name": "Weighted Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts",
+        "core"
+      ],
+      "equipment": [
+        "bumper-plates",
+        "iron-plates",
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Plate or band loading added only after strong standard push-ups.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "band_resisted_push_up",
+      "name": "Band-Resisted Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Band across upper back and held under hands.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "suspension_strap_push_up",
+      "name": "Suspension-Strap Push-Up",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts",
+        "core"
+      ],
+      "equipment": [
+        "suspension-straps"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hands in straps; walk feet back to choose difficulty.",
+      "coaching_notes": [
+        "Instability makes this more advanced than a floor push-up."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "rack_dip_chest_bias",
+      "name": "Rack Dip - Chest Bias",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "rack-mounted-dip-station"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Use rack dip handles; lean torso slightly forward.",
+      "coaching_notes": [],
+      "regressions": [
+        "bench_dip",
+        "push_up"
+      ],
+      "progressions": [
+        "weighted_rack_dip"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "weighted_rack_dip",
+      "name": "Weighted Rack Dip - Chest Bias",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "rack-mounted-dip-station",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Weighted dip belt/plate loading if available; otherwise use controlled tempo bodyweight dips.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "incline_barbell_press",
+      "name": "Incline Barbell Bench Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "FID bench at a low-to-moderate incline inside rack.",
+      "coaching_notes": [],
+      "regressions": [
+        "incline_dumbbell_press"
+      ],
+      "progressions": [
+        "paused_incline_barbell_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "paused_incline_barbell_press",
+      "name": "Paused Incline Barbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Incline rack press with a brief pause near upper chest.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "incline_dumbbell_press",
+      "name": "Incline Dumbbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "FID bench around 15-45 degrees.",
+      "coaching_notes": [],
+      "regressions": [
+        "single_arm_incline_dumbbell_press"
+      ],
+      "progressions": [
+        "alternating_incline_dumbbell_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "single_arm_incline_dumbbell_press",
+      "name": "Single-Arm Incline Dumbbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "core",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Press one dumbbell at a time on incline bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "neutral_grip_incline_dumbbell_press",
+      "name": "Neutral-Grip Incline Dumbbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Incline bench; palms face each other.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "alternating_incline_dumbbell_press",
+      "name": "Alternating Incline Dumbbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Alternate incline dumbbell reps while maintaining shoulder position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "incline_smith_machine_press",
+      "name": "Incline Smith Machine Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "upper_chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Incline bench centered under Smith bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "low_incline_dumbbell_press",
+      "name": "Low-Incline Dumbbell Press",
+      "movement_patterns": [
+        "incline_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "upper_chest",
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "FID bench at roughly the lowest incline setting to split flat and incline emphasis.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "standing_barbell_overhead_press",
+      "name": "Standing Barbell Overhead Press",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "upper_chest",
+        "core"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar starts from front rack at shoulder height.",
+      "coaching_notes": [],
+      "regressions": [
+        "seated_dumbbell_shoulder_press"
+      ],
+      "progressions": [
+        "push_press"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "seated_dumbbell_shoulder_press",
+      "name": "Seated Dumbbell Shoulder Press",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "upper_chest"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Upright or high-incline FID bench.",
+      "coaching_notes": [],
+      "regressions": [
+        "single_arm_dumbbell_shoulder_press"
+      ],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "single_arm_dumbbell_shoulder_press",
+      "name": "Single-Arm Dumbbell Shoulder Press",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "core"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Standing or seated; press one dumbbell overhead.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "arnold_press",
+      "name": "Arnold Press",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Seated or standing dumbbell press with rotation through the rep.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_overhead_press",
+      "name": "Smith Machine Overhead Press",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "upper_chest"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Seated or standing under Smith path with safe bar travel.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "landmine_press",
+      "name": "Landmine Press",
+      "movement_patterns": [
+        "incline_push",
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "upper_chest",
+        "triceps",
+        "core"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Bar anchored in landmine; press from shoulder in an arcing path.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "half_kneeling_landmine_press",
+      "name": "Half-Kneeling Landmine Press",
+      "movement_patterns": [
+        "incline_push",
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "upper_chest",
+        "triceps",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Half-kneeling stance with bar in opposite-side hand or same-side hand.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_chest_primary",
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "pike_push_up",
+      "name": "Pike Push-Up",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "upper_chest"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hips high, torso angled downward; press head toward floor.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "feet_elevated_pike_push_up",
+      "name": "Feet-Elevated Pike Push-Up",
+      "movement_patterns": [
+        "vertical_push"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "shoulders",
+        "triceps",
+        "upper_chest"
+      ],
+      "equipment": [
+        "adjustable-fid-bench"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "advanced",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Feet on bench, hips stacked higher than shoulders.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "incline_push_primary"
+      ]
+    },
+    {
+      "id": "standing_cable_fly",
+      "name": "Standing Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Dual cables set around chest height; step forward between columns.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "high_to_low_cable_fly",
+      "name": "High-to-Low Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "lower_chest",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable pulleys set high; sweep handles down and together.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "low_to_high_cable_fly",
+      "name": "Low-to-High Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable pulleys set low; sweep handles upward toward upper chest/eye line.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "single_arm_cable_fly",
+      "name": "Single-Arm Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "anterior_delts",
+        "core"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "One cable column; staggered stance to resist rotation.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "bench_cable_fly",
+      "name": "Flat Bench Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "adjustable-fid-bench",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench centered between low cables.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "incline_cable_fly",
+      "name": "Incline Cable Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "adjustable-fid-bench",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Incline bench centered between low cables.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "dumbbell_fly",
+      "name": "Dumbbell Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat bench; soft elbows with controlled stretch.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "incline_dumbbell_fly",
+      "name": "Incline Dumbbell Fly",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "upper_chest",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Low-to-moderate incline bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "squeeze_press_dumbbell",
+      "name": "Dumbbell Squeeze Press",
+      "movement_patterns": [
+        "horizontal_push",
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Press dumbbells together while pressing from flat bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2",
+        "horizontal_push_primary"
+      ]
+    },
+    {
+      "id": "dumbbell_pullover_chest_bias",
+      "name": "Dumbbell Pullover - Chest Bias",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "chest",
+        "lats",
+        "serratus"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Upper back on bench or lying lengthwise; keep ribs controlled and elbows softly bent.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "med_ball_power_push_down",
+      "name": "Medicine-Ball Power Pushdown",
+      "movement_patterns": [
+        "chest_accessory"
+      ],
+      "exercise_role": "power",
+      "muscle_focus": [
+        "chest",
+        "triceps",
+        "core"
+      ],
+      "equipment": [
+        "med-slam-ball"
+      ],
+      "load_type": "power",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Slam/push ball down forcefully from chest or overhead depending on space and ball type.",
+      "coaching_notes": [
+        "Use only with a slam-safe ball and clear floor area."
+      ],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "chest_accessory_1",
+        "chest_accessory_2"
+      ]
+    },
+    {
+      "id": "cable_triceps_pushdown",
+      "name": "Cable Triceps Pushdown",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High pulley with straight bar/V-bar attachment.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "rope_triceps_pushdown",
+      "name": "Rope Triceps Pushdown",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High pulley with rope; separate rope ends at bottom.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "single_arm_cable_triceps_pushdown",
+      "name": "Single-Arm Cable Triceps Pushdown",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "High pulley with single handle or no handle.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "reverse_grip_cable_pushdown",
+      "name": "Reverse-Grip Cable Pushdown",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High pulley; palms-up grip on bar/handle.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "overhead_rope_triceps_extension",
+      "name": "Overhead Rope Triceps Extension",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps_long_head"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable set low or high behind body; elbows point forward/up.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "single_arm_overhead_cable_triceps_extension",
+      "name": "Single-Arm Overhead Cable Triceps Extension",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps_long_head"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Single handle or cuff; arm overhead with controlled elbow flexion.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "cross_body_cable_triceps_extension",
+      "name": "Cross-Body Cable Triceps Extension",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Cable around shoulder height; extend across body.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "ez_bar_skull_crusher",
+      "name": "EZ-Bar Skull Crusher",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "barbells",
+        "iron-plates",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "EZ bar on flat bench; lower toward forehead or behind head.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "dumbbell_skull_crusher",
+      "name": "Dumbbell Skull Crusher",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Flat or incline bench with neutral-grip dumbbells.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "dumbbell_overhead_triceps_extension",
+      "name": "Dumbbell Overhead Triceps Extension",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps_long_head"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "One dumbbell held with both hands overhead, seated or standing.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "single_arm_dumbbell_overhead_triceps_extension",
+      "name": "Single-Arm Dumbbell Overhead Triceps Extension",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps_long_head"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "One dumbbell overhead; keep upper arm near ear.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "dumbbell_triceps_kickback",
+      "name": "Dumbbell Triceps Kickback",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Hip-hinged or bench-supported; extend elbow behind body.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "cable_triceps_kickback",
+      "name": "Cable Triceps Kickback",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Low cable with single handle or no handle.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "bench_dip",
+      "name": "Bench Dip",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "triceps",
+        "chest",
+        "anterior_delts"
+      ],
+      "equipment": [
+        "adjustable-fid-bench"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hands on bench behind hips; feet on floor.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "band_triceps_pushdown",
+      "name": "Band Triceps Pushdown",
+      "movement_patterns": [
+        "triceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "triceps"
+      ],
+      "equipment": [
+        "resistance-bands",
+        "power-rack"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Band anchored high on rack.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "triceps_focus",
+        "triceps_isolation_1",
+        "triceps_isolation_2"
+      ]
+    },
+    {
+      "id": "barbell_bent_over_row",
+      "name": "Barbell Bent-Over Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps",
+        "erectors"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hip hinge with barbell; row toward lower ribs.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "pendlay_row",
+      "name": "Pendlay Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps",
+        "erectors"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar starts dead on floor each rep; torso near parallel.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "underhand_barbell_row",
+      "name": "Underhand Barbell Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "biceps"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Supinated grip barbell row toward waist.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "dumbbell_bent_over_row",
+      "name": "Two-Dumbbell Bent-Over Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hinge and row both dumbbells toward hips/ribs.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "single_arm_dumbbell_row",
+      "name": "Single-Arm Dumbbell Row",
+      "movement_patterns": [
+        "horizontal_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "One hand and/or knee supported on bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "chest_supported_dumbbell_row",
+      "name": "Chest-Supported Dumbbell Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "mid_back",
+        "lats",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Incline bench chest support; row dumbbells without torso swing.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "incline_prone_dumbbell_row",
+      "name": "Incline Prone Dumbbell Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "mid_back",
+        "rear_delts",
+        "lats",
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Prone on incline bench, elbows out or tucked based on target.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "seated_cable_row",
+      "name": "Seated Cable Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "biceps",
+        "rear_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "v-bars",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use low cable/linked sides if needed with seated position on floor or bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "standing_cable_row",
+      "name": "Standing Cable Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "biceps",
+        "core"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "v-bars",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable at lower-to-mid height; athletic stance.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "single_arm_cable_row",
+      "name": "Single-Arm Cable Row",
+      "movement_patterns": [
+        "horizontal_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "biceps",
+        "core"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "One cable column; row toward hip or ribs.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "wide_grip_cable_row",
+      "name": "Wide-Grip Cable Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "mid_back",
+        "rear_delts",
+        "lats",
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use wide/MAG or straight attachment; elbows travel wider.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "chest_supported_cable_row",
+      "name": "Chest-Supported Cable Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "mid_back",
+        "lats",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "pritchett-pad",
+        "rogue-mag-grip-handles",
+        "v-bars"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use Pritchett pad as chest support facing cable.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "landmine_t_bar_row",
+      "name": "Landmine T-Bar Row",
+      "movement_patterns": [
+        "horizontal_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "v-bars"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar in landmine with V-bar/handle near sleeve.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "chest_supported_landmine_row",
+      "name": "Chest-Supported Landmine Row",
+      "movement_patterns": [
+        "horizontal_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "mid_back",
+        "lats",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "pritchett-pad"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Pritchett pad supports chest while rowing landmine bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "meadows_row",
+      "name": "Meadows Row",
+      "movement_patterns": [
+        "horizontal_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Stand perpendicular to landmine and row sleeve end.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_row",
+      "name": "Smith Machine Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "mid_back",
+        "rear_delts",
+        "biceps"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Guided bar row from hip-hinged stance.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "inverted_row",
+      "name": "Inverted Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "mid_back",
+        "lats",
+        "rear_delts",
+        "biceps",
+        "core"
+      ],
+      "equipment": [
+        "barbells",
+        "spotter-arms-j-cups",
+        "power-rack"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Bar in rack at waist height; body under bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "suspension_strap_row",
+      "name": "Suspension-Strap Row",
+      "movement_patterns": [
+        "horizontal_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "mid_back",
+        "lats",
+        "rear_delts",
+        "biceps",
+        "core"
+      ],
+      "equipment": [
+        "suspension-straps"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Lean back holding straps; walk feet forward to increase difficulty.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "horizontal_back_primary",
+        "horizontal_pull_primary"
+      ]
+    },
+    {
+      "id": "pull_up",
+      "name": "Pull-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps",
+        "brachialis"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Pronated grip on pull-up bar.",
+      "coaching_notes": [],
+      "regressions": [
+        "band_assisted_pull_up",
+        "lat_pulldown"
+      ],
+      "progressions": [
+        "weighted_pull_up"
+      ],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "chin_up",
+      "name": "Chin-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "biceps",
+        "upper_back"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Supinated grip on pull-up bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "neutral_grip_pull_up",
+      "name": "Neutral-Grip Pull-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps",
+        "brachialis"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Neutral handles on multi-grip bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "wide_grip_pull_up",
+      "name": "Wide-Grip Pull-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "teres_major"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Wide pronated grip if shoulders tolerate it.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "band_assisted_pull_up",
+      "name": "Band-Assisted Pull-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar",
+        "resistance-bands"
+      ],
+      "load_type": "bodyweight_assisted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Loop band over pull-up bar and place foot/knee in band.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "weighted_pull_up",
+      "name": "Weighted Pull-Up",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Add external load only after strong bodyweight reps.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "lat_pulldown",
+      "name": "Lat Pulldown",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use high cable with pulldown attachment; kneel or sit with thighs anchored as available.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "neutral_grip_lat_pulldown",
+      "name": "Neutral-Grip Lat Pulldown",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps",
+        "brachialis"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "v-bars"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High cable with neutral MAG/V handle.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "wide_grip_lat_pulldown",
+      "name": "Wide-Grip Lat Pulldown",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "teres_major"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "rogue-mag-grip-handles",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High cable with wide attachment.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "single_arm_lat_pulldown",
+      "name": "Single-Arm Lat Pulldown",
+      "movement_patterns": [
+        "vertical_pull"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "lats",
+        "upper_back",
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Single high cable; kneel or sit and pull elbow toward hip.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "straight_arm_cable_pulldown",
+      "name": "Straight-Arm Cable Pulldown",
+      "movement_patterns": [
+        "vertical_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "lats",
+        "teres_major",
+        "triceps_long_head"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High cable; keep arms mostly straight and sweep to thighs.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "cable_pullover",
+      "name": "Cable Pullover",
+      "movement_patterns": [
+        "vertical_pull",
+        "back_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "lats",
+        "teres_major"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High cable pullover with slight hip hinge.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "vertical_back_primary",
+        "vertical_pull_primary"
+      ]
+    },
+    {
+      "id": "face_pull",
+      "name": "Face Pull",
+      "movement_patterns": [
+        "back_accessory",
+        "shoulder_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "rear_delts",
+        "mid_traps",
+        "external_rotators"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "High cable rope pulled toward nose/forehead with elbows high.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "cable_rear_delt_row",
+      "name": "Cable Rear-Delt Row",
+      "movement_patterns": [
+        "back_accessory",
+        "shoulder_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "rear_delts",
+        "mid_back"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable around chest height; elbows travel out wide.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "reverse_cable_fly",
+      "name": "Reverse Cable Fly",
+      "movement_patterns": [
+        "back_accessory",
+        "shoulder_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "rear_delts",
+        "mid_traps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Dual cables crossed or single-column variation.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "dumbbell_reverse_fly",
+      "name": "Dumbbell Reverse Fly",
+      "movement_patterns": [
+        "back_accessory",
+        "shoulder_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "rear_delts",
+        "mid_traps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bent-over or chest-supported on incline bench.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2",
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "prone_y_raise",
+      "name": "Prone Y Raise",
+      "movement_patterns": [
+        "shoulder_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "lower_traps",
+        "rear_delts",
+        "shoulders"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Prone incline bench; raise arms in Y shape with very light dumbbells.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "dumbbell_lateral_raise",
+      "name": "Dumbbell Lateral Raise",
+      "movement_patterns": [
+        "shoulder_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "lateral_delts"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Stand tall, raise dumbbells out to sides.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "cable_lateral_raise",
+      "name": "Cable Lateral Raise",
+      "movement_patterns": [
+        "shoulder_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "lateral_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Low cable handle; raise across body or from side.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "leaning_cable_lateral_raise",
+      "name": "Leaning Cable Lateral Raise",
+      "movement_patterns": [
+        "shoulder_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "lateral_delts"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Hold rack/cable column and lean slightly away from low cable.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "dumbbell_front_raise",
+      "name": "Dumbbell Front Raise",
+      "movement_patterns": [
+        "shoulder_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "anterior_delts"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Raise dumbbells forward to shoulder height.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "shoulder_focus"
+      ]
+    },
+    {
+      "id": "dumbbell_shrug",
+      "name": "Dumbbell Shrug",
+      "movement_patterns": [
+        "back_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "upper_traps"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hold dumbbells at sides and elevate shoulders without rolling.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2"
+      ]
+    },
+    {
+      "id": "barbell_shrug",
+      "name": "Barbell Shrug",
+      "movement_patterns": [
+        "back_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "upper_traps"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar in hands in front; shrug straight up.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "back_accessory_1",
+        "back_accessory_2"
+      ]
+    },
+    {
+      "id": "ez_bar_curl",
+      "name": "EZ-Bar Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps",
+        "brachialis"
+      ],
+      "equipment": [
+        "barbells",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Standing curl with EZ bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "barbell_curl",
+      "name": "Barbell Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "barbells",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Straight bar curl; keep ribs down and elbows mostly fixed.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "dumbbell_curl",
+      "name": "Dumbbell Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Standing or seated alternating/simultaneous curls.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "alternating_dumbbell_curl",
+      "name": "Alternating Dumbbell Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Alternate sides while maintaining posture.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "hammer_curl",
+      "name": "Hammer Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "brachialis",
+        "biceps",
+        "forearms"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Neutral-grip dumbbell curl.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "cross_body_hammer_curl",
+      "name": "Cross-Body Hammer Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "brachialis",
+        "forearms",
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Curl dumbbell toward opposite pec/shoulder.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "incline_dumbbell_curl",
+      "name": "Incline Dumbbell Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Lie back on incline bench; arms hang behind torso.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "spider_curl_dumbbell",
+      "name": "Dumbbell Spider Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Chest-supported on incline bench facing down.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "preacher_curl_isolator",
+      "name": "Isolator Preacher Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer",
+        "barbells",
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use Bulletproof Isolator/preacher setup if configured safely.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "cable_curl",
+      "name": "Cable Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Low cable with straight/EZ/handle attachment.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "rope_hammer_curl",
+      "name": "Rope Hammer Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "brachialis",
+        "biceps",
+        "forearms"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Low cable rope curl with neutral grip.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "single_arm_cable_curl",
+      "name": "Single-Arm Cable Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Low cable single handle.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "high_cable_curl",
+      "name": "High Cable Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable(s) set high; curl toward temples in a front-double-biceps position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "band_curl",
+      "name": "Band Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps"
+      ],
+      "equipment": [
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Stand on band or anchor low to rack.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "suspension_strap_biceps_curl",
+      "name": "Suspension-Strap Biceps Curl",
+      "movement_patterns": [
+        "biceps_isolation"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "biceps",
+        "core"
+      ],
+      "equipment": [
+        "suspension-straps"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Lean back holding straps; curl body toward handles.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "biceps_focus",
+        "biceps_isolation_1",
+        "biceps_isolation_2"
+      ]
+    },
+    {
+      "id": "back_squat",
+      "name": "Barbell Back Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "adductors",
+        "core"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Rack bar on upper back with safeties set below bottom position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "front_squat",
+      "name": "Barbell Front Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "upper_back",
+        "core"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Front rack or cross-arm grip from rack.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "box_squat",
+      "name": "Box Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "hamstrings"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "adjustable-fid-bench",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Squat to controlled box/bench height without relaxing posture.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_squat",
+      "name": "Smith Machine Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Guided Smith bar squat with foot placement adjusted to natural bar path.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "goblet_squat",
+      "name": "Goblet Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "core"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hold kettlebell or dumbbell at chest.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "double_kettlebell_front_squat",
+      "name": "Double-Kettlebell Front Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "core",
+        "upper_back"
+      ],
+      "equipment": [
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Two kettlebells in front-rack position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "dumbbell_front_squat",
+      "name": "Dumbbell Front Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "core"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Pair of dumbbells at shoulders/front rack.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "landmine_squat",
+      "name": "Landmine Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "core"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Hold landmine sleeve at chest and squat.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "landmine_hack_squat",
+      "name": "Landmine Hack Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar behind shoulder with landmine anchored; squat in the arcing path.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "atg_split_squat",
+      "name": "ATG Split Squat",
+      "movement_patterns": [
+        "quad_compound",
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "hip_flexors",
+        "ankles"
+      ],
+      "equipment": [
+        "atg-usa-platform",
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Front foot elevated/wedged as needed; long knee-over-toe split squat through controlled range.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory",
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "bodyweight_squat",
+      "name": "Bodyweight Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "core"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Squat to comfortable depth with heels grounded.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "jump_squat",
+      "name": "Jump Squat",
+      "movement_patterns": [
+        "quad_compound"
+      ],
+      "exercise_role": "power",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "calves"
+      ],
+      "equipment": [],
+      "load_type": "power",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Explosive bodyweight squat jump; land softly.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "romanian_deadlift",
+      "name": "Barbell Romanian Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "erectors"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Start from standing; hinge to mid-shin while maintaining neutral spine.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "dumbbell_romanian_deadlift",
+      "name": "Dumbbell Romanian Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "erectors"
+      ],
+      "equipment": [
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Dumbbells held in front or at sides; hinge under control.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_rdl",
+      "name": "Smith Machine Romanian Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "erectors"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Guided Smith bar with hips moving back under stable foot position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "single_leg_rdl",
+      "name": "Single-Leg Romanian Deadlift",
+      "movement_patterns": [
+        "hip_hinge",
+        "hamstring_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "balance",
+        "core"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Contralateral or ipsilateral dumbbell/kettlebell loading.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory",
+        "hamstring_glute_compound_primary",
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "barbell_deadlift",
+      "name": "Barbell Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings",
+        "quads",
+        "erectors",
+        "upper_back"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Pull from floor with plates; reset each rep.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "sumo_deadlift",
+      "name": "Sumo Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings",
+        "quads",
+        "adductors",
+        "erectors"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Wide stance and inside hand position.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "kettlebell_deadlift",
+      "name": "Kettlebell Deadlift",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "quads"
+      ],
+      "equipment": [
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Kettlebell between feet; hinge/squat hybrid.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "kettlebell_swing",
+      "name": "Kettlebell Swing",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "power",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [
+        "kettlebells"
+      ],
+      "load_type": "power",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Ballistic hip hinge; do not squat the swing.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "barbell_hip_thrust",
+      "name": "Barbell Hip Thrust",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "rogue-leg-roller-hip-thrust-attachment",
+        "adjustable-fid-bench"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Upper back supported by bench/hip-thrust attachment; bar over hips.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "smith_machine_hip_thrust",
+      "name": "Smith Machine Hip Thrust",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_primary",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "adjustable-fid-bench",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bench behind body and Smith bar over hips.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "single_leg_hip_thrust",
+      "name": "Single-Leg Hip Thrust",
+      "movement_patterns": [
+        "hip_hinge",
+        "hamstring_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [
+        "adjustable-fid-bench",
+        "rogue-leg-roller-hip-thrust-attachment",
+        "dumbbells"
+      ],
+      "load_type": "bodyweight_or_weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": true,
+      "setup": "Upper back supported; one foot on floor, optional dumbbell on hip.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory",
+        "hamstring_glute_compound_primary",
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "glute_bridge",
+      "name": "Glute Bridge",
+      "movement_patterns": [
+        "hip_hinge",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Supine on floor; bridge hips until ribs, hips, knees align.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary",
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "good_morning",
+      "name": "Barbell Good Morning",
+      "movement_patterns": [
+        "hip_hinge"
+      ],
+      "exercise_role": "compound_accessory",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "erectors"
+      ],
+      "equipment": [
+        "barbells",
+        "bumper-plates",
+        "iron-plates",
+        "spotter-arms-j-cups"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Bar on back; soft knees; hinge with strict control.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "leg_extension_isolator",
+      "name": "Isolator Leg Extension",
+      "movement_patterns": [
+        "quad_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "quads"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Configure Bulletproof Isolator leg developer for leg extension.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "single_leg_extension_isolator",
+      "name": "Single-Leg Isolator Leg Extension",
+      "movement_patterns": [
+        "quad_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "quads"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Single-leg setup on isolator with controlled lockout.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "bulgarian_split_squat",
+      "name": "Bulgarian Split Squat",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "adductors"
+      ],
+      "equipment": [
+        "dumbbells",
+        "adjustable-fid-bench",
+        "rogue-leg-roller-hip-thrust-attachment"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Rear foot on bench or leg roller; optional dumbbells.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "front_foot_elevated_split_squat",
+      "name": "Front-Foot-Elevated Split Squat",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "atg-usa-platform",
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Front foot elevated on platform/wedge; controlled knee travel.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "step_up",
+      "name": "Step-Up",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "adjustable-fid-bench",
+        "atg-usa-platform",
+        "dumbbells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Step onto stable bench/platform; control the descent.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "walking_lunge",
+      "name": "Walking Lunge",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "adductors"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Alternating forward steps with optional dumbbells.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "reverse_lunge",
+      "name": "Reverse Lunge",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Step backward into lunge; drive through front foot.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "forward_lunge",
+      "name": "Forward Lunge",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Step forward into lunge; push back to start.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "lateral_lunge",
+      "name": "Lateral Lunge",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "quads",
+        "glutes",
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Step to side, sit into working hip while trail leg stays long.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "cossack_squat",
+      "name": "Cossack Squat",
+      "movement_patterns": [
+        "quad_accessory",
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "adductors",
+        "quads",
+        "glutes",
+        "hips"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Side-to-side deep squat pattern with one leg extended.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2",
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "sissy_squat_assisted",
+      "name": "Assisted Sissy Squat",
+      "movement_patterns": [
+        "quad_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads"
+      ],
+      "equipment": [
+        "power-rack",
+        "resistance-bands"
+      ],
+      "load_type": "bodyweight_or_assisted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hold rack upright or band assistance while knees travel forward and torso leans back.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_accessory"
+      ]
+    },
+    {
+      "id": "cyclist_squat",
+      "name": "Cyclist Squat",
+      "movement_patterns": [
+        "quad_compound",
+        "quad_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "atg-usa-platform",
+        "dumbbells",
+        "kettlebells"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Heels elevated on squat board/wedge with narrow stance.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "quad_accessory",
+        "quad_compound_primary"
+      ]
+    },
+    {
+      "id": "lying_leg_curl_isolator",
+      "name": "Isolator Lying Leg Curl",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Configure Bulletproof Isolator for lying leg curl.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "seated_leg_curl_isolator",
+      "name": "Isolator Seated Leg Curl",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Configure isolator/leg developer for seated curl if supported.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "single_leg_curl_isolator",
+      "name": "Single-Leg Isolator Leg Curl",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "bulletproof-isolator-leg-developer"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Single-leg curl with controlled eccentric.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "slider_leg_curl",
+      "name": "Bodyweight Slider Leg Curl",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes",
+        "core"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Use socks/sliders on smooth floor if available; bridge hips and curl heels in.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "band_leg_curl",
+      "name": "Banded Leg Curl",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "resistance-bands",
+        "power-rack"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Band anchored low on rack; prone or standing curl.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "nordic_hamstring_lower",
+      "name": "Assisted Nordic Hamstring Lower",
+      "movement_patterns": [
+        "hamstring_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "hamstrings",
+        "glutes"
+      ],
+      "equipment": [
+        "rogue-leg-roller-hip-thrust-attachment",
+        "power-rack",
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Anchor ankles under roller; use hands or band for assistance.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory"
+      ]
+    },
+    {
+      "id": "cable_pull_through",
+      "name": "Cable Pull-Through",
+      "movement_patterns": [
+        "hip_hinge",
+        "hamstring_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "tricep-ropes"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Low cable rope between legs; hinge and stand tall.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "hamstring_accessory",
+        "hamstring_glute_compound_primary"
+      ]
+    },
+    {
+      "id": "cable_glute_kickback",
+      "name": "Cable Glute Kickback",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "glutes",
+        "hamstrings"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Low cable ankle/handle setup; kick leg back without lumbar extension.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "cable_hip_abduction",
+      "name": "Cable Hip Abduction",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "glute_medius",
+        "abductors"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Low cable ankle/handle setup; move leg out to side.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "banded_lateral_walk",
+      "name": "Banded Lateral Walk",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "glute_medius",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Band around ankles/knees; side-step under control.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "banded_monster_walk",
+      "name": "Banded Monster Walk",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "glute_medius",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "resistance-bands"
+      ],
+      "load_type": "weighted",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Band around legs; diagonal steps forward/back.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "standing_calf_raise",
+      "name": "Standing Calf Raise",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "calves"
+      ],
+      "equipment": [
+        "atg-usa-platform",
+        "dumbbells",
+        "bts-smith-attachment"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Use ATG platform edge and dumbbells or Smith bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "smith_machine_calf_raise",
+      "name": "Smith Machine Calf Raise",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "calves"
+      ],
+      "equipment": [
+        "bts-smith-attachment",
+        "atg-usa-platform",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Balls of feet on platform under Smith bar.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "single_leg_calf_raise",
+      "name": "Single-Leg Calf Raise",
+      "movement_patterns": [
+        "lower_body_accessory"
+      ],
+      "exercise_role": "isolation",
+      "muscle_focus": [
+        "calves"
+      ],
+      "equipment": [
+        "atg-usa-platform",
+        "dumbbells",
+        "power-rack"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": true,
+      "bodyweight": false,
+      "setup": "Hold rack for balance; optional dumbbell in free hand.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": [
+        "lower_accessory_mobility_1",
+        "lower_accessory_mobility_2"
+      ]
+    },
+    {
+      "id": "hanging_knee_raise",
+      "name": "Hanging Knee Raise",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "abs",
+        "hip_flexors",
+        "grip"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hang from pull-up bar and raise knees under control.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "hanging_leg_raise",
+      "name": "Hanging Leg Raise",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "abs",
+        "hip_flexors",
+        "grip"
+      ],
+      "equipment": [
+        "multi-grip-pull-up-bar"
+      ],
+      "load_type": "bodyweight",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Hang and raise straight or mostly straight legs.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "ab_rollout",
+      "name": "Ab Roller Rollout",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "abs",
+        "lats",
+        "triceps",
+        "core"
+      ],
+      "equipment": [
+        "ab-roller"
+      ],
+      "load_type": "bodyweight_with_tool",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Kneeling rollout; brace ribs down and avoid lumbar sag.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "plank",
+      "name": "Plank",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "abs",
+        "core",
+        "glutes"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Forearms on floor; hold straight line.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "side_plank",
+      "name": "Side Plank",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "obliques",
+        "core",
+        "glute_medius"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Elbow under shoulder, hips lifted.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "dead_bug",
+      "name": "Dead Bug",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory_mobility",
+      "muscle_focus": [
+        "abs",
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [],
+      "load_type": "bodyweight",
+      "difficulty": "beginner",
+      "unilateral": false,
+      "bodyweight": true,
+      "setup": "Supine contralateral arm/leg reaches with low back controlled.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "pallof_press",
+      "name": "Cable Pallof Press",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "obliques",
+        "core",
+        "anti_rotation"
+      ],
+      "equipment": [
+        "integrated-dual-cable-system",
+        "assorted-cable-attachments"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Cable at chest height from side; press handle straight out resisting rotation.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    },
+    {
+      "id": "landmine_rotation",
+      "name": "Landmine Rotation",
+      "movement_patterns": [
+        "core_accessory"
+      ],
+      "exercise_role": "accessory",
+      "muscle_focus": [
+        "obliques",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "landmine-attachment",
+        "barbells",
+        "bumper-plates",
+        "iron-plates"
+      ],
+      "load_type": "weighted",
+      "difficulty": "intermediate",
+      "unilateral": false,
+      "bodyweight": false,
+      "setup": "Arc landmine bar side-to-side with hips/ribs controlled.",
+      "coaching_notes": [],
+      "regressions": [],
+      "progressions": [],
+      "source_refs": [
+        "nasm_exercise_library",
+        "ace_exercise_library",
+        "exrx_exercise_directory",
+        "marshallfit_equipment_catalog"
+      ],
+      "template_slots": []
+    }
+  ]
 }
