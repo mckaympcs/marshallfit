@@ -1,4 +1,274 @@
 {
-  "_comment": "Beginner note: this file will define workout templates, such as chest/triceps or legs. Templates describe the slots a generated workout should fill.",
-  "templates": []
+  "_comment": "Workout templates define the ordered movement slots a generated workout should fill. Each slot includes a movement/category target plus default set and rep guidance so the generator can stay data-driven.",
+  "templates": [
+    {
+      "id": "chest_triceps",
+      "name": "Chest / Triceps",
+      "description": "Pressing-focused day with one flat or horizontal press, one incline/vertical press, two chest accessories, and two isolated triceps movements.",
+      "slots": [
+        {
+          "id": "horizontal_push_primary",
+          "name": "Primary Horizontal Push",
+          "movement_pattern": "horizontal_push",
+          "muscle_focus": ["chest"],
+          "exercise_role": "compound_primary",
+          "examples": ["barbell_bench_press", "dumbbell_bench_press", "smith_machine_bench_press"],
+          "sets": 4,
+          "reps": "6-10"
+        },
+        {
+          "id": "incline_push_primary",
+          "name": "Incline or Shoulder-Dominant Press",
+          "movement_pattern": "incline_push",
+          "alternate_movement_patterns": ["vertical_push"],
+          "muscle_focus": ["upper_chest", "shoulders", "triceps"],
+          "exercise_role": "compound_primary",
+          "examples": ["incline_dumbbell_press", "incline_barbell_press", "standing_military_press"],
+          "sets": 3,
+          "reps": "6-10"
+        },
+        {
+          "id": "chest_accessory_1",
+          "name": "Chest Accessory 1",
+          "movement_pattern": "chest_accessory",
+          "muscle_focus": ["chest"],
+          "exercise_role": "accessory",
+          "examples": ["cable_fly", "dips", "dumbbell_fly"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "chest_accessory_2",
+          "name": "Chest Accessory 2",
+          "movement_pattern": "chest_accessory",
+          "muscle_focus": ["chest"],
+          "exercise_role": "accessory",
+          "examples": ["low_to_high_cable_fly", "push_ups", "machine_or_smith_decline_press"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "triceps_isolation_1",
+          "name": "Triceps Isolation 1",
+          "movement_pattern": "triceps_isolation",
+          "muscle_focus": ["triceps"],
+          "exercise_role": "isolation",
+          "examples": ["cable_triceps_pushdown", "rope_pushdown", "ez_bar_skull_crusher"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "triceps_isolation_2",
+          "name": "Triceps Isolation 2",
+          "movement_pattern": "triceps_isolation",
+          "muscle_focus": ["triceps"],
+          "exercise_role": "isolation",
+          "examples": ["overhead_cable_triceps_extension", "single_arm_cable_triceps_extension", "dumbbell_triceps_kickback"],
+          "sets": 3,
+          "reps": "12-15"
+        }
+      ]
+    },
+    {
+      "id": "back_biceps",
+      "name": "Back / Biceps",
+      "description": "Pulling-focused day with one strong horizontal back movement, one strong vertical back movement, two back accessories, and two biceps exercises.",
+      "slots": [
+        {
+          "id": "horizontal_pull_primary",
+          "name": "Primary Horizontal Back",
+          "movement_pattern": "horizontal_pull",
+          "muscle_focus": ["back", "lats", "mid_back"],
+          "exercise_role": "compound_primary",
+          "examples": ["barbell_bent_over_row", "chest_supported_dumbbell_row", "seated_cable_row"],
+          "sets": 4,
+          "reps": "6-10"
+        },
+        {
+          "id": "vertical_pull_primary",
+          "name": "Primary Vertical Back",
+          "movement_pattern": "vertical_pull",
+          "muscle_focus": ["lats", "upper_back"],
+          "exercise_role": "compound_primary",
+          "examples": ["pull_up", "lat_pulldown", "assisted_pull_up"],
+          "sets": 4,
+          "reps": "6-10"
+        },
+        {
+          "id": "back_accessory_1",
+          "name": "Back Accessory 1",
+          "movement_pattern": "back_accessory",
+          "muscle_focus": ["back", "lats", "rear_delts"],
+          "exercise_role": "accessory",
+          "examples": ["single_arm_dumbbell_row", "landmine_row", "straight_arm_cable_pulldown"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "back_accessory_2",
+          "name": "Back Accessory 2",
+          "movement_pattern": "back_accessory",
+          "muscle_focus": ["back", "mid_back", "rear_delts"],
+          "exercise_role": "accessory",
+          "examples": ["face_pull", "cable_rear_delt_row", "dumbbell_pullover"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "biceps_isolation_1",
+          "name": "Biceps Exercise 1",
+          "movement_pattern": "biceps_isolation",
+          "muscle_focus": ["biceps"],
+          "exercise_role": "isolation",
+          "examples": ["ez_bar_curl", "dumbbell_curl", "cable_curl"],
+          "sets": 3,
+          "reps": "8-12"
+        },
+        {
+          "id": "biceps_isolation_2",
+          "name": "Biceps Exercise 2",
+          "movement_pattern": "biceps_isolation",
+          "muscle_focus": ["biceps", "brachialis", "forearms"],
+          "exercise_role": "isolation",
+          "examples": ["hammer_curl", "preacher_curl", "incline_dumbbell_curl"],
+          "sets": 3,
+          "reps": "10-15"
+        }
+      ]
+    },
+    {
+      "id": "lower_body",
+      "name": "Lower Body",
+      "description": "Leg day with one compound quad-dominant lift, one compound hamstring/glute-dominant lift, quad and hamstring accessories, and two lower-body accessory or mobility movements.",
+      "slots": [
+        {
+          "id": "quad_compound_primary",
+          "name": "Compound Quad-Dominant Lift",
+          "movement_pattern": "quad_compound",
+          "muscle_focus": ["quads", "glutes"],
+          "exercise_role": "compound_primary",
+          "examples": ["back_squat", "front_squat", "goblet_squat"],
+          "sets": 4,
+          "reps": "5-8"
+        },
+        {
+          "id": "hamstring_glute_compound_primary",
+          "name": "Compound Hamstring / Glute Lift",
+          "movement_pattern": "hip_hinge",
+          "muscle_focus": ["hamstrings", "glutes"],
+          "exercise_role": "compound_primary",
+          "examples": ["romanian_deadlift", "smith_machine_rdl", "barbell_hip_thrust"],
+          "sets": 4,
+          "reps": "6-10"
+        },
+        {
+          "id": "quad_accessory",
+          "name": "Accessory Quad",
+          "movement_pattern": "quad_accessory",
+          "muscle_focus": ["quads"],
+          "exercise_role": "accessory",
+          "examples": ["leg_extension", "bulgarian_split_squat", "step_up"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "hamstring_accessory",
+          "name": "Accessory Hamstring",
+          "movement_pattern": "hamstring_accessory",
+          "muscle_focus": ["hamstrings"],
+          "exercise_role": "accessory",
+          "examples": ["leg_curl", "single_leg_rdl", "glute_ham_raise"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "lower_accessory_mobility_1",
+          "name": "Lower-Body Accessory / Mobility 1",
+          "movement_pattern": "lower_body_accessory",
+          "muscle_focus": ["glutes", "quads", "hips"],
+          "exercise_role": "accessory_mobility",
+          "examples": ["walking_lunge", "reverse_lunge", "cable_glute_kickback"],
+          "sets": 3,
+          "reps": "10-12 each side"
+        },
+        {
+          "id": "lower_accessory_mobility_2",
+          "name": "Lower-Body Accessory / Mobility 2",
+          "movement_pattern": "lower_body_accessory",
+          "muscle_focus": ["glutes", "hips", "abductors"],
+          "exercise_role": "accessory_mobility",
+          "examples": ["cable_hip_abduction", "lateral_lunge", "banded_lateral_walk"],
+          "sets": 3,
+          "reps": "12-15 each side"
+        }
+      ]
+    },
+    {
+      "id": "upper_body",
+      "name": "Upper Body",
+      "description": "All-in upper-body day with incline chest work, vertical and horizontal back pulls, shoulder focus, biceps focus, and triceps focus.",
+      "slots": [
+        {
+          "id": "incline_chest_primary",
+          "name": "Incline Chest Press",
+          "movement_pattern": "incline_push",
+          "muscle_focus": ["upper_chest", "triceps", "shoulders"],
+          "exercise_role": "compound_primary",
+          "examples": ["incline_dumbbell_press", "incline_barbell_press", "incline_smith_machine_press"],
+          "sets": 4,
+          "reps": "6-10"
+        },
+        {
+          "id": "vertical_back_primary",
+          "name": "Vertical Back",
+          "movement_pattern": "vertical_pull",
+          "muscle_focus": ["lats", "upper_back"],
+          "exercise_role": "compound_primary",
+          "examples": ["pull_up", "lat_pulldown", "neutral_grip_pulldown"],
+          "sets": 3,
+          "reps": "6-10"
+        },
+        {
+          "id": "horizontal_back_primary",
+          "name": "Horizontal Back",
+          "movement_pattern": "horizontal_pull",
+          "muscle_focus": ["mid_back", "lats", "rear_delts"],
+          "exercise_role": "compound_primary",
+          "examples": ["seated_cable_row", "chest_supported_dumbbell_row", "bent_over_row"],
+          "sets": 3,
+          "reps": "8-12"
+        },
+        {
+          "id": "shoulder_focus",
+          "name": "Shoulder Focus",
+          "movement_pattern": "shoulder_accessory",
+          "muscle_focus": ["shoulders", "lateral_delts", "rear_delts"],
+          "exercise_role": "accessory",
+          "examples": ["dumbbell_lateral_raise", "cable_lateral_raise", "face_pull"],
+          "sets": 3,
+          "reps": "10-15"
+        },
+        {
+          "id": "biceps_focus",
+          "name": "Biceps Focus",
+          "movement_pattern": "biceps_isolation",
+          "muscle_focus": ["biceps"],
+          "exercise_role": "isolation",
+          "examples": ["ez_bar_curl", "dumbbell_curl", "cable_curl"],
+          "sets": 3,
+          "reps": "8-12"
+        },
+        {
+          "id": "triceps_focus",
+          "name": "Triceps Focus",
+          "movement_pattern": "triceps_isolation",
+          "muscle_focus": ["triceps"],
+          "exercise_role": "isolation",
+          "examples": ["rope_pushdown", "overhead_cable_triceps_extension", "ez_bar_skull_crusher"],
+          "sets": 3,
+          "reps": "10-15"
+        }
+      ]
+    }
+  ]
 }
