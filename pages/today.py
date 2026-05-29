@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 from datetime import date, datetime
 from pathlib import Path
+from textwrap import dedent
 from typing import Any
 
 import streamlit as st
@@ -35,6 +36,15 @@ def html_escape(value: Any) -> str:
         .replace('"', "&quot;")
         .replace("'", "&#x27;")
     )
+
+
+def render_raw_html(markup: str) -> None:
+    """Render app-generated HTML without letting Markdown turn indentation into code blocks."""
+    clean_markup = dedent(markup).strip()
+    if hasattr(st, "html"):
+        st.html(clean_markup)
+    else:
+        st.markdown(clean_markup, unsafe_allow_html=True)
 
 
 def friendly_date(value: str) -> str:
@@ -104,7 +114,8 @@ def exercise_card(exercise: dict[str, Any], number: int) -> str:
     )
     category = exercise.get("category") or exercise.get("slot_name") or "Training Slot"
 
-    return f"""
+    return dedent(
+        f"""
         <article class="today-exercise-card">
             <div class="exercise-number">{number:02d}</div>
             <div class="exercise-art">{diagram_markup(exercise)}</div>
@@ -121,7 +132,8 @@ def exercise_card(exercise: dict[str, Any], number: int) -> str:
                 </div>
             </div>
         </article>
-    """
+        """
+    ).strip()
 
 
 def workout_column(title: str, exercises: list[dict[str, Any]]) -> str:
@@ -134,12 +146,14 @@ def workout_column(title: str, exercises: list[dict[str, Any]]) -> str:
             for index, exercise in enumerate(exercises, start=1)
         )
 
-    return f"""
+    return dedent(
+        f"""
         <section class="workout-column" aria-label="{html_escape(title)} workout">
             <div class="column-heading">{html_escape(title)}</div>
             <div class="exercise-list">{cards_markup}</div>
         </section>
-    """
+        """
+    ).strip()
 
 
 def inject_today_styles() -> None:
@@ -479,7 +493,7 @@ def render_today_page() -> None:
 
     inject_today_styles()
     render_fullscreen_helper()
-    st.markdown(
+    render_raw_html(
         f"""
         <main class="today-tv-shell">
             <section class="today-header" aria-label="MarshallFit daily workout date">
@@ -492,8 +506,7 @@ def render_today_page() -> None:
             </div>
             <div class="today-footer-bar" aria-hidden="true"></div>
         </main>
-        """,
-        unsafe_allow_html=True,
+        """
     )
 
 
