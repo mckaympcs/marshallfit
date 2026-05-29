@@ -73,7 +73,7 @@ TABLE_COLUMNS = [
     "source_refs",
 ]
 
-st.set_page_config(page_title="MarshallFit", page_icon="💪", layout="wide")
+st.set_page_config(page_title="MarshallFit", page_icon=ICON_LOGO_PATH, layout="wide")
 
 
 def inject_design_system() -> None:
