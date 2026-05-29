@@ -8,21 +8,42 @@ from __future__ import annotations
 
 import base64
 import calendar
+import importlib.util
 import json
 from datetime import date, datetime
 from pathlib import Path
+from types import ModuleType
 from typing import Any, Callable
 
 import streamlit as st
 
-from generator import (
-    generate_workout,
-    load_templates,
-    regenerate_exercise,
-    resolve_diagram_path,
-)
-
 BASE_DIR = Path(__file__).resolve().parent
+GENERATOR_PATH = BASE_DIR / "generator.py"
+
+
+def load_workout_engine() -> ModuleType:
+    """Load the local generator module without relying on import-name resolution.
+
+    Streamlit Cloud can have extra packages installed in the runtime. Loading by
+    file path guarantees the app uses this repository's ``generator.py`` instead
+    of any unrelated package named ``generator``.
+    """
+    spec = importlib.util.spec_from_file_location(
+        "marshallfit_workout_generator", GENERATOR_PATH
+    )
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Unable to load workout generator from {GENERATOR_PATH}")
+
+    workout_engine = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(workout_engine)
+    return workout_engine
+
+
+workout_engine = load_workout_engine()
+generate_workout = workout_engine.generate_workout
+load_templates = workout_engine.load_templates
+regenerate_exercise = workout_engine.regenerate_exercise
+resolve_diagram_path = workout_engine.resolve_diagram_path
 EXERCISES_PATH = BASE_DIR / "data" / "exercises.json"
 SCHEDULE_PATH = BASE_DIR / "data" / "scheduled_workouts.json"
 ICON_LOGO_PATH = BASE_DIR / "public" / "logos" / "marshallfit-icon.svg"
