@@ -1,0 +1,4 @@
+{
+  "_comment": "Beginner note: this file will list the equipment available in the Marshall Fit gym. The generator will eventually use it to avoid choosing exercises that need unavailable equipment.",
+  "equipment": []
+}

@@ -1,0 +1,4 @@
+{
+  "_comment": "Beginner note: this file will define workout templates, such as chest/triceps or legs. Templates describe the slots a generated workout should fill.",
+  "templates": []
+}
