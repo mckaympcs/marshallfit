@@ -1,4 +1,4 @@
-"""Simple Streamlit interface for the Marshall Fit workout generator.
+"""Streamlit interface for the Marshall Fit workout generator and scheduler.
 
 Run this app locally with:
     streamlit run app.py
@@ -6,18 +6,32 @@ Run this app locally with:
 
 from __future__ import annotations
 
+import calendar
 import json
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
 import streamlit as st
 
-from generator import generate_workout, load_templates
+from generator import generate_workout, load_templates, regenerate_exercise
 
-# The app file lives in the project root, so this path lets us check whether a
-# diagram image exists before asking Streamlit to display it.
 BASE_DIR = Path(__file__).resolve().parent
 EXERCISES_PATH = BASE_DIR / "data" / "exercises.json"
+SCHEDULE_PATH = BASE_DIR / "data" / "scheduled_workouts.json"
+EXERCISES_PER_COLUMN = 3
+WORKOUT_TYPE_TO_TEMPLATE = {
+    "Chest / Triceps": "chest_triceps",
+    "Back / Biceps": "back_biceps",
+    "Lower Body": "lower_body",
+    "Upper Body": "upper_body",
+}
+WORKOUT_TYPE_COLORS = {
+    "Chest / Triceps": {"bg": "#fee2e2", "border": "#ef4444", "text": "#991b1b"},
+    "Back / Biceps": {"bg": "#dbeafe", "border": "#3b82f6", "text": "#1e3a8a"},
+    "Lower Body": {"bg": "#dcfce7", "border": "#22c55e", "text": "#166534"},
+    "Upper Body": {"bg": "#fef9c3", "border": "#eab308", "text": "#854d0e"},
+}
 LIST_FIELDS = [
     "movement_patterns",
     "muscle_focus",
@@ -49,11 +63,8 @@ TABLE_COLUMNS = [
     "source_refs",
 ]
 
-
-# Streamlit reruns this script from top to bottom whenever the user changes a
-# widget. Keeping the page setup near the top makes the app easy to scan.
 st.set_page_config(
-    page_title="Marshall Fit Workout Generator",
+    page_title="Marshall Fit",
     page_icon="💪",
     layout="wide",
 )
@@ -92,14 +103,8 @@ st.markdown(
             text-transform: uppercase;
         }
 
-        .diagram-placeholder span {
-            display: block;
-            font-size: 1.75rem;
-            line-height: 1;
-        }
-
         .exercise-title {
-            font-size: 1.18rem;
+            font-size: 1.08rem;
             font-weight: 800;
             line-height: 1.18;
             margin: 0 0 0.1rem;
@@ -107,7 +112,7 @@ st.markdown(
 
         .exercise-category {
             color: #64748b;
-            font-size: 0.86rem;
+            font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             margin-bottom: 0.75rem;
@@ -119,19 +124,38 @@ st.markdown(
             border-radius: 999px;
             color: #ffffff;
             display: inline-block;
-            font-size: 0.94rem;
+            font-size: 0.9rem;
             font-weight: 800;
-            padding: 0.48rem 0.85rem;
+            padding: 0.42rem 0.75rem;
+        }
+
+        .calendar-card {
+            border-radius: 18px;
+            min-height: 104px;
+            padding: 0.8rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .calendar-day-number {
+            font-size: 1.05rem;
+            font-weight: 900;
+        }
+
+        .calendar-workout-label {
+            font-size: 0.84rem;
+            font-weight: 800;
+            margin-top: 0.45rem;
+        }
+
+        .calendar-empty-label {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 0.45rem;
         }
     </style>
     """,
     unsafe_allow_html=True,
-)
-
-st.title("Marshall Fit Workout Generator")
-st.write(
-    "Generate a six-exercise workout with diagram-first cards, quick movement "
-    "categories, and set/rep targets matched to the exercise type."
 )
 
 
@@ -148,6 +172,23 @@ def save_exercise_library(exercise_library: dict[str, Any]) -> None:
         exercise_file.write("\n")
 
 
+def load_schedule() -> dict[str, Any]:
+    """Load scheduled workouts from the local app data file."""
+    if not SCHEDULE_PATH.exists():
+        return {}
+
+    with SCHEDULE_PATH.open(encoding="utf-8") as schedule_file:
+        return json.load(schedule_file)
+
+
+def save_schedule(schedule: dict[str, Any]) -> None:
+    """Persist scheduled workouts to the local app data file."""
+    SCHEDULE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with SCHEDULE_PATH.open("w", encoding="utf-8") as schedule_file:
+        json.dump(schedule, schedule_file, indent=2)
+        schedule_file.write("\n")
+
+
 def friendly_label(value: str) -> str:
     """Turn data keys such as ``horizontal_push`` into readable labels."""
     return value.replace("_", " ").replace("-", " ").title()
@@ -158,69 +199,6 @@ def list_to_cell(value: Any) -> str:
     if isinstance(value, list):
         return ", ".join(str(item) for item in value)
 
-    st.markdown("---")
-
-    # Landscape browsers get two columns of three exercises. Streamlit stacks
-    # columns on narrow screens, so the same structure remains mobile-friendly.
-    exercise_columns = st.columns(2, gap="large")
-    column_groups = [
-        workout["exercises"][:EXERCISES_PER_COLUMN],
-        workout["exercises"][EXERCISES_PER_COLUMN:],
-    ]
-
-    for column_index, column_exercises in enumerate(column_groups):
-        with exercise_columns[column_index]:
-            for offset, exercise in enumerate(column_exercises, start=1):
-                number = column_index * EXERCISES_PER_COLUMN + offset
-
-                with st.container(border=True):
-                    diagram_column, details_column = st.columns(
-                        [1, 2.25], gap="medium", vertical_alignment="center"
-                    )
-
-                    with diagram_column:
-                        diagram_path = exercise["diagram_path"]
-                        diagram_file = BASE_DIR / diagram_path
-
-                        # If the diagram file has already been added locally,
-                        # show it. Otherwise, render a visual placeholder in the
-                        # same spot so the card layout is ready for diagrams.
-                        if diagram_file.exists():
-                            st.image(str(diagram_file), caption="Exercise diagram")
-                        else:
-                            st.markdown(
-                                """
-                                <div class="diagram-placeholder">
-                                    <span>↔</span>
-                                    Diagram<br>Placeholder
-                                </div>
-                                """,
-                                unsafe_allow_html=True,
-                            )
-
-                    with details_column:
-                        st.markdown(
-                            (
-                                '<div class="exercise-title">'
-                                f'{number}. {exercise["name"]}'
-                                '</div>'
-                            ),
-                            unsafe_allow_html=True,
-                        )
-                        st.markdown(
-                            (
-                                '<div class="exercise-category">'
-                                f'{exercise["category"]}'
-                                '</div>'
-                            ),
-                            unsafe_allow_html=True,
-                        )
-                        st.markdown(
-                            "<div class=\"sets-reps-pill\">"
-                            f"{exercise['sets']} sets × {exercise['reps']} reps"
-                            "</div>",
-                            unsafe_allow_html=True,
-                        )
     return "" if value is None else str(value)
 
 
@@ -274,16 +252,13 @@ def table_row_to_exercise(
         else:
             exercise[column] = str(row.get(column, "")).strip()
 
-    # Keep older exercise records compatible even if they predate an explicit
-    # description field. The table exposes description separately from setup for
-    # review, while the generator can continue to rely on the original fields.
-    exercise["description"] = str(row.get("description", "")).strip()
     return exercise
 
 
 def unique_values(exercises: list[dict[str, Any]], field: str) -> list[str]:
-    """Collect sorted unique values for a scalar or list exercise field."""
+    """Return sorted unique values for a field that may contain strings or lists."""
     values: set[str] = set()
+
     for exercise in exercises:
         raw_value = exercise.get(field)
         if isinstance(raw_value, list):
@@ -348,67 +323,356 @@ def exercise_matches_filters(
     return True
 
 
-def render_workout_generator_page() -> None:
-    """Render the original random workout generator page."""
-    st.header("Generate Workout")
+def generate_workout_columns(template_id: str) -> dict[str, list[dict[str, Any]]]:
+    """Generate the weighted and non-weighted workout columns for a template."""
+    return {
+        "weighted": generate_workout(template_id, "weighted")["exercises"],
+        "bodyweight": generate_workout(template_id, "bodyweight")["exercises"],
+    }
 
-    # Load the workout day templates from the finished JSON data file. The dropdown
-    # shows friendly names while the app keeps the matching template id behind the
-    # scenes for the generator.
+
+def replace_exercise_slot(
+    exercises: list[dict[str, Any]], template_id: str, mode: str, slot_id: str
+) -> list[dict[str, Any]]:
+    """Return exercises with only the requested slot regenerated."""
+    replacement = regenerate_exercise(template_id, mode, slot_id, exercises)
+    return [
+        replacement if exercise.get("slot_id") == slot_id else exercise
+        for exercise in exercises
+    ]
+
+
+def render_exercise_card(
+    exercise: dict[str, Any],
+    number: int,
+    key_prefix: str,
+    on_regenerate: Any | None = None,
+) -> None:
+    """Render a generated exercise card with an optional per-slot regenerate button."""
+    with st.container(border=True):
+        diagram_column, details_column = st.columns(
+            [1, 2.25], gap="medium", vertical_alignment="center"
+        )
+
+        with diagram_column:
+            diagram_path = exercise["diagram_path"]
+            diagram_file = BASE_DIR / diagram_path
+
+            if diagram_file.exists():
+                st.image(str(diagram_file), caption="Exercise diagram")
+            else:
+                st.markdown(
+                    """
+                    <div class="diagram-placeholder">
+                        <span>↔</span>
+                        Diagram<br>Placeholder
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        with details_column:
+            st.markdown(
+                f'<div class="exercise-title">{number}. {exercise["name"]}</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f'<div class="exercise-category">{exercise["category"]}</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                '<div class="sets-reps-pill">'
+                f"{exercise['sets']} sets × {exercise['reps']} reps"
+                "</div>",
+                unsafe_allow_html=True,
+            )
+            st.caption(f"Slot: {exercise['slot_name']}")
+
+            if on_regenerate is not None:
+                if st.button("Regenerate", key=f"{key_prefix}_{exercise['slot_id']}"):
+                    on_regenerate(exercise["slot_id"])
+                    st.rerun()
+
+
+def render_exercise_column(
+    title: str,
+    exercises: list[dict[str, Any]],
+    key_prefix: str,
+    on_regenerate: Any | None = None,
+) -> None:
+    """Render one complete exercise column."""
+    st.subheader(title)
+    for number, exercise in enumerate(exercises, start=1):
+        render_exercise_card(exercise, number, key_prefix, on_regenerate)
+
+
+def render_dual_workout_columns(
+    weighted_exercises: list[dict[str, Any]],
+    bodyweight_exercises: list[dict[str, Any]],
+    key_prefix: str,
+    on_regenerate_weighted: Any | None = None,
+    on_regenerate_bodyweight: Any | None = None,
+) -> None:
+    """Render weighted and non-weighted generated workouts side by side."""
+    weighted_column, bodyweight_column = st.columns(2, gap="large")
+    with weighted_column:
+        render_exercise_column(
+            "Weighted",
+            weighted_exercises,
+            f"{key_prefix}_weighted",
+            on_regenerate_weighted,
+        )
+    with bodyweight_column:
+        render_exercise_column(
+            "Non-Weighted",
+            bodyweight_exercises,
+            f"{key_prefix}_bodyweight",
+            on_regenerate_bodyweight,
+        )
+
+
+def render_workout_generator_page() -> None:
+    """Render the random workout generator page with full and slot regeneration."""
+    st.title("Marshall Fit Workout Generator")
+    st.write(
+        "Generate weighted and non-weighted options for the same workout day, then "
+        "regenerate the full workout or any individual exercise slot."
+    )
+
     templates = load_templates()
     template_names = [template["name"] for template in templates]
     selected_template_name = st.selectbox("Workout day / template", template_names)
     selected_template = next(
         template for template in templates if template["name"] == selected_template_name
     )
+    template_id = selected_template["id"]
 
-    # Let the user choose whether they want a weighted workout or a bodyweight-first
-    # workout. The lowercase value is passed directly into generator.py.
-    mode = st.radio("Mode", ["weighted", "bodyweight"], horizontal=True)
+    generator_state = st.session_state.setdefault("generator_workout", {})
+    template_changed = generator_state.get("template_id") != template_id
 
-    # The button prevents a new random workout from appearing on every widget change.
-    # A workout is only created when the user explicitly asks for one.
-    if st.button("Generate Workout"):
-        workout = generate_workout(selected_template["id"], mode)
+    if (
+        st.button("Generate / Regenerate Full Workout", type="primary")
+        or template_changed
+    ):
+        columns = generate_workout_columns(template_id)
+        st.session_state.generator_workout = {
+            "template_id": template_id,
+            "weighted": columns["weighted"],
+            "bodyweight": columns["bodyweight"],
+        }
+        generator_state = st.session_state.generator_workout
 
-        st.subheader(workout["template_name"])
-        st.caption(f"Mode: {workout['mode'].title()}")
+    if selected_template.get("description"):
+        st.info(selected_template["description"])
 
-        if workout.get("template_description"):
-            st.write(workout["template_description"])
+    def regenerate_weighted(slot_id: str) -> None:
+        st.session_state.generator_workout["weighted"] = replace_exercise_slot(
+            st.session_state.generator_workout["weighted"],
+            template_id,
+            "weighted",
+            slot_id,
+        )
 
-        # Display each generated exercise with beginner-friendly labels so the user
-        # can understand why it was selected and what set/rep target to use.
-        for number, exercise in enumerate(workout["exercises"], start=1):
-            st.markdown(f"### {number}. {exercise['name']}")
-            st.write(f"**Template slot:** {exercise['slot_name']}")
-            st.write(f"**Movement pattern:** {exercise['movement_pattern']}")
-            st.write(
-                "**Primary muscles:** "
-                + (", ".join(exercise["primary_muscles"]) or "Not listed")
-            )
-            st.write(
-                "**Secondary muscles:** "
-                + (", ".join(exercise["secondary_muscles"]) or "Not listed")
-            )
-            st.write(
-                f"**Sets/Reps:** {exercise['sets']} sets of {exercise['reps']} reps"
-            )
+    def regenerate_bodyweight(slot_id: str) -> None:
+        st.session_state.generator_workout["bodyweight"] = replace_exercise_slot(
+            st.session_state.generator_workout["bodyweight"],
+            template_id,
+            "bodyweight",
+            slot_id,
+        )
 
-            diagram_path = exercise["diagram_path"]
-            diagram_file = BASE_DIR / diagram_path
+    render_dual_workout_columns(
+        generator_state["weighted"],
+        generator_state["bodyweight"],
+        "generator",
+        regenerate_weighted,
+        regenerate_bodyweight,
+    )
 
-            # If the diagram file has already been added locally, show the image.
-            # Otherwise, show the intended path as placeholder text for now.
-            if diagram_file.exists():
-                st.image(str(diagram_file), caption=diagram_path)
-            else:
-                st.info(f"Diagram placeholder: {diagram_path}")
+
+def date_key(year: int, month: int, day: int) -> str:
+    """Format a calendar date key as YYYY-MM-DD."""
+    return date(year, month, day).isoformat()
+
+
+def render_calendar_cell(
+    day: int, year: int, month: int, schedule: dict[str, Any]
+) -> None:
+    """Render one day in the monthly Scheduler calendar."""
+    if day == 0:
+        st.markdown("<div class='calendar-card'></div>", unsafe_allow_html=True)
+        return
+
+    key = date_key(year, month, day)
+    scheduled_workout = schedule.get(key)
+
+    if scheduled_workout:
+        workout_type = scheduled_workout["workoutType"]
+        colors = WORKOUT_TYPE_COLORS[workout_type]
+        label_html = f"<div class='calendar-workout-label'>{workout_type}</div>"
+    else:
+        colors = {"bg": "#f8fafc", "border": "#e2e8f0", "text": "#334155"}
+        label_html = "<div class='calendar-empty-label'>Unscheduled</div>"
+
+    st.markdown(
+        f"""
+        <div class="calendar-card" style="background: {colors['bg']}; border: 2px solid {colors['border']}; color: {colors['text']};">
+            <div class="calendar-day-number">{day}</div>
+            {label_html}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    button_label = "Edit day" if scheduled_workout else "Schedule day"
+    if st.button(button_label, key=f"schedule_day_{key}", use_container_width=True):
+        st.session_state.scheduler_selected_date = key
+        st.session_state.scheduler_view = "day"
+        st.rerun()
+
+
+def render_scheduler_calendar() -> None:
+    """Render the main monthly Scheduler calendar view."""
+    st.title("Scheduler")
+    st.write(
+        "Click a calendar day, choose the workout type, generate weighted and "
+        "non-weighted options, and save the workout back to the month view."
+    )
+
+    today = date.today()
+    controls = st.columns([1, 1, 2])
+    month = controls[0].selectbox(
+        "Month",
+        list(range(1, 13)),
+        index=today.month - 1,
+        format_func=lambda m: calendar.month_name[m],
+    )
+    year = controls[1].number_input(
+        "Year", min_value=2000, max_value=2100, value=today.year
+    )
+
+    schedule = load_schedule()
+    st.subheader(f"{calendar.month_name[month]} {year}")
+
+    for weekday, column in zip(calendar.day_abbr, st.columns(7)):
+        column.markdown(f"**{weekday}**")
+
+    month_matrix = calendar.monthcalendar(int(year), int(month))
+    for week in month_matrix:
+        columns = st.columns(7, gap="small")
+        for day, column in zip(week, columns):
+            with column:
+                render_calendar_cell(day, int(year), int(month), schedule)
+
+
+def render_scheduler_day_view() -> None:
+    """Render workout selection and generation for one scheduled date."""
+    selected_date = st.session_state.get("scheduler_selected_date")
+    if not selected_date:
+        st.session_state.scheduler_view = "calendar"
+        st.rerun()
+
+    schedule = load_schedule()
+    existing_workout = schedule.get(selected_date, {})
+    readable_date = datetime.fromisoformat(selected_date).strftime("%A, %B %-d, %Y")
+
+    if st.button("← Back to calendar"):
+        st.session_state.scheduler_view = "calendar"
+        st.rerun()
+
+    st.title(f"Schedule {readable_date}")
+    st.write("Choose a workout type, generate your plan, and save it to this day.")
+
+    workout_types = list(WORKOUT_TYPE_TO_TEMPLATE)
+    initial_type = existing_workout.get("workoutType", workout_types[0])
+    selected_type = st.selectbox(
+        "Workout type",
+        workout_types,
+        index=workout_types.index(initial_type),
+        key=f"scheduler_type_{selected_date}",
+    )
+    template_id = WORKOUT_TYPE_TO_TEMPLATE[selected_type]
+
+    day_state_key = f"scheduler_draft_{selected_date}"
+    draft = st.session_state.get(day_state_key)
+    needs_new_draft = draft is None or draft.get("workoutType") != selected_type
+
+    if needs_new_draft:
+        if existing_workout.get("workoutType") == selected_type:
+            st.session_state[day_state_key] = {
+                "workoutType": selected_type,
+                "weightedExercises": existing_workout.get("weightedExercises", []),
+                "nonWeightedExercises": existing_workout.get(
+                    "nonWeightedExercises", []
+                ),
+            }
+        else:
+            columns = generate_workout_columns(template_id)
+            st.session_state[day_state_key] = {
+                "workoutType": selected_type,
+                "weightedExercises": columns["weighted"],
+                "nonWeightedExercises": columns["bodyweight"],
+            }
+        draft = st.session_state[day_state_key]
+
+    action_columns = st.columns([1, 1, 2])
+    if action_columns[0].button("Regenerate Full Workout", type="secondary"):
+        columns = generate_workout_columns(template_id)
+        st.session_state[day_state_key] = {
+            "workoutType": selected_type,
+            "weightedExercises": columns["weighted"],
+            "nonWeightedExercises": columns["bodyweight"],
+        }
+        st.rerun()
+
+    if action_columns[1].button("Save to This Day", type="primary"):
+        schedule[selected_date] = {
+            "date": selected_date,
+            "workoutType": selected_type,
+            "weightedExercises": draft["weightedExercises"],
+            "nonWeightedExercises": draft["nonWeightedExercises"],
+        }
+        save_schedule(schedule)
+        st.session_state.scheduler_view = "calendar"
+        st.success(f"Saved {selected_type} to {selected_date}.")
+        st.rerun()
+
+    def regenerate_weighted(slot_id: str) -> None:
+        st.session_state[day_state_key]["weightedExercises"] = replace_exercise_slot(
+            st.session_state[day_state_key]["weightedExercises"],
+            template_id,
+            "weighted",
+            slot_id,
+        )
+
+    def regenerate_bodyweight(slot_id: str) -> None:
+        st.session_state[day_state_key]["nonWeightedExercises"] = replace_exercise_slot(
+            st.session_state[day_state_key]["nonWeightedExercises"],
+            template_id,
+            "bodyweight",
+            slot_id,
+        )
+
+    render_dual_workout_columns(
+        draft["weightedExercises"],
+        draft["nonWeightedExercises"],
+        f"scheduler_{selected_date}",
+        regenerate_weighted,
+        regenerate_bodyweight,
+    )
+
+
+def render_scheduler_page() -> None:
+    """Render either the Scheduler calendar or selected-day flow."""
+    if st.session_state.get("scheduler_view", "calendar") == "day":
+        render_scheduler_day_view()
+    else:
+        render_scheduler_calendar()
 
 
 def render_exercise_library_page() -> None:
     """Render a filterable, editable table for the exercise JSON library."""
-    st.header("Exercise Library")
+    st.title("Exercise Library")
     st.write(
         "Review every generated exercise, filter by the main programming fields, "
         "edit table values, add new exercises, or mark rows for deletion."
@@ -419,44 +683,37 @@ def render_exercise_library_page() -> None:
 
     st.subheader("Filters")
     filter_columns = st.columns(3)
-    search_text = filter_columns[0].text_input(
-        "Search name, ID, description, setup, or notes"
-    )
+    search_text = filter_columns[0].text_input("Search")
     selected_load_types = filter_columns[1].multiselect(
-        "Load type", unique_values(exercises, "load_type"), format_func=friendly_label
+        "Load type", unique_values(exercises, "load_type")
     )
     selected_difficulties = filter_columns[2].multiselect(
-        "Difficulty", unique_values(exercises, "difficulty"), format_func=friendly_label
+        "Difficulty", unique_values(exercises, "difficulty")
     )
 
     filter_columns = st.columns(3)
     selected_movements = filter_columns[0].multiselect(
-        "Movement type",
-        unique_values(exercises, "movement_patterns"),
-        format_func=friendly_label,
+        "Movement type", unique_values(exercises, "movement_patterns")
     )
     selected_roles = filter_columns[1].multiselect(
-        "Exercise role",
-        unique_values(exercises, "exercise_role"),
-        format_func=friendly_label,
+        "Exercise role", unique_values(exercises, "exercise_role")
     )
     selected_muscles = filter_columns[2].multiselect(
-        "Muscle focus",
-        unique_values(exercises, "muscle_focus"),
-        format_func=friendly_label,
+        "Muscle focus", unique_values(exercises, "muscle_focus")
     )
 
     filter_columns = st.columns(3)
     selected_equipment = filter_columns[0].multiselect(
-        "Equipment", unique_values(exercises, "equipment"), format_func=friendly_label
+        "Equipment", unique_values(exercises, "equipment")
     )
     selected_template_slots = filter_columns[1].multiselect(
-        "Template slots",
-        unique_values(exercises, "template_slots"),
-        format_func=friendly_label,
+        "Template slots", unique_values(exercises, "template_slots")
     )
-    bodyweight_filter = filter_columns[2].selectbox("Bodyweight", ["Any", "Yes", "No"])
-    unilateral_filter = filter_columns[2].selectbox("Unilateral", ["Any", "Yes", "No"])
+    bodyweight_filter = filter_columns[2].radio(
+        "Bodyweight", ["Any", "Yes", "No"], horizontal=True
+    )
+
+    unilateral_filter = st.radio("Unilateral", ["Any", "Yes", "No"], horizontal=True)
 
     filtered_exercises = [
         exercise
@@ -477,7 +734,7 @@ def render_exercise_library_page() -> None:
     ]
 
     st.caption(f"Showing {len(filtered_exercises)} of {len(exercises)} exercises.")
-    st.info(
+    st.write(
         "Comma-separated fields become JSON lists when saved. Check the delete "
         "box beside any exercise you want removed, then click Save table changes."
     )
@@ -631,9 +888,11 @@ def render_exercise_library_page() -> None:
                 st.rerun()
 
 
-page = st.sidebar.radio("Page", ["Generate Workout", "Exercise Library"])
+page = st.sidebar.radio("Page", ["Generate Workout", "Scheduler", "Exercise Library"])
 
 if page == "Generate Workout":
     render_workout_generator_page()
+elif page == "Scheduler":
+    render_scheduler_page()
 else:
     render_exercise_library_page()
