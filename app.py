@@ -78,39 +78,48 @@ st.markdown(
                 linear-gradient(135deg, rgba(255, 76, 90, 0.12), rgba(255, 185, 68, 0.16)),
                 #f8fafc;
             border: 1px dashed rgba(255, 76, 90, 0.45);
-            border-radius: 18px;
+            border-radius: 14px;
             color: #475569;
             display: flex;
             flex-direction: column;
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            gap: 0.35rem;
+            gap: 0.2rem;
             justify-content: center;
-            min-height: 132px;
-            padding: 1rem;
+            min-height: 86px;
+            padding: 0.65rem;
             text-align: center;
             text-transform: uppercase;
         }
 
         .diagram-placeholder span {
             display: block;
-            font-size: 1.75rem;
+            font-size: 1.35rem;
             line-height: 1;
         }
 
+        .workout-column-title {
+            color: #111827;
+            font-size: 1.08rem;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            margin: 0 0 0.55rem;
+            text-transform: uppercase;
+        }
+
         .exercise-title {
-            font-size: 1.18rem;
-            font-weight: 800;
-            line-height: 1.18;
-            margin: 0 0 0.1rem;
+            font-size: 1.08rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin: 0 0 0.18rem;
         }
 
         .exercise-category {
             color: #64748b;
-            font-size: 0.86rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            margin: 0;
             text-transform: uppercase;
         }
 
@@ -119,9 +128,12 @@ st.markdown(
             border-radius: 999px;
             color: #ffffff;
             display: inline-block;
-            font-size: 0.94rem;
-            font-weight: 800;
-            padding: 0.48rem 0.85rem;
+            font-size: 0.86rem;
+            font-weight: 900;
+            line-height: 1.1;
+            padding: 0.45rem 0.72rem;
+            text-align: center;
+            white-space: nowrap;
         }
     </style>
     """,
@@ -130,8 +142,8 @@ st.markdown(
 
 st.title("Marshall Fit Workout Generator")
 st.write(
-    "Generate a six-exercise workout with diagram-first cards, quick movement "
-    "categories, and set/rep targets matched to the exercise type."
+    "Generate paired six-exercise weighted and bodyweight workouts with compact "
+    "diagram, movement type, and set/rep rows."
 )
 
 
@@ -158,70 +170,66 @@ def list_to_cell(value: Any) -> str:
     if isinstance(value, list):
         return ", ".join(str(item) for item in value)
 
-    st.markdown("---")
-
-    # Landscape browsers get two columns of three exercises. Streamlit stacks
-    # columns on narrow screens, so the same structure remains mobile-friendly.
-    exercise_columns = st.columns(2, gap="large")
-    column_groups = [
-        workout["exercises"][:EXERCISES_PER_COLUMN],
-        workout["exercises"][EXERCISES_PER_COLUMN:],
-    ]
-
-    for column_index, column_exercises in enumerate(column_groups):
-        with exercise_columns[column_index]:
-            for offset, exercise in enumerate(column_exercises, start=1):
-                number = column_index * EXERCISES_PER_COLUMN + offset
-
-                with st.container(border=True):
-                    diagram_column, details_column = st.columns(
-                        [1, 2.25], gap="medium", vertical_alignment="center"
-                    )
-
-                    with diagram_column:
-                        diagram_path = exercise["diagram_path"]
-                        diagram_file = BASE_DIR / diagram_path
-
-                        # If the diagram file has already been added locally,
-                        # show it. Otherwise, render a visual placeholder in the
-                        # same spot so the card layout is ready for diagrams.
-                        if diagram_file.exists():
-                            st.image(str(diagram_file), caption="Exercise diagram")
-                        else:
-                            st.markdown(
-                                """
-                                <div class="diagram-placeholder">
-                                    <span>↔</span>
-                                    Diagram<br>Placeholder
-                                </div>
-                                """,
-                                unsafe_allow_html=True,
-                            )
-
-                    with details_column:
-                        st.markdown(
-                            (
-                                '<div class="exercise-title">'
-                                f'{number}. {exercise["name"]}'
-                                '</div>'
-                            ),
-                            unsafe_allow_html=True,
-                        )
-                        st.markdown(
-                            (
-                                '<div class="exercise-category">'
-                                f'{exercise["category"]}'
-                                '</div>'
-                            ),
-                            unsafe_allow_html=True,
-                        )
-                        st.markdown(
-                            "<div class=\"sets-reps-pill\">"
-                            f"{exercise['sets']} sets × {exercise['reps']} reps"
-                            "</div>",
-                            unsafe_allow_html=True,
-                        )
     return "" if value is None else str(value)
+
+
+def render_diagram(exercise: dict[str, Any]) -> None:
+    """Render an exercise diagram or a compact placeholder in its position."""
+    diagram_path = exercise["diagram_path"]
+    diagram_file = BASE_DIR / diagram_path
+
+    if diagram_file.exists():
+        st.image(str(diagram_file), use_container_width=True)
+    else:
+        st.markdown(
+            """
+            <div class="diagram-placeholder">
+                <span>↔</span>
+                Diagram
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+
+def render_exercise_row(exercise: dict[str, Any]) -> None:
+    """Render one compact generated-workout row."""
+    with st.container(border=True):
+        diagram_column, details_column, prescription_column = st.columns(
+            [0.95, 1.75, 0.95], gap="small", vertical_alignment="center"
+        )
+
+        with diagram_column:
+            render_diagram(exercise)
+
+        with details_column:
+            st.markdown(
+                f'<div class="exercise-title">{exercise["name"]}</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f'<div class="exercise-category">{exercise["category"]}</div>',
+                unsafe_allow_html=True,
+            )
+
+        with prescription_column:
+            st.markdown(
+                '<div class="sets-reps-pill">'
+                f"{exercise['sets']} sets × {exercise['reps']} reps"
+                "</div>",
+                unsafe_allow_html=True,
+            )
+
+
+def render_workout_column(title: str, workout: dict[str, Any]) -> None:
+    """Render six generated exercises for one workout mode."""
+    st.markdown(
+        f'<div class="workout-column-title">{title}</div>',
+        unsafe_allow_html=True,
+    )
+
+    for exercise in workout["exercises"][:6]:
+        render_exercise_row(exercise)
 
 
 def cell_to_list(value: Any) -> list[str]:
@@ -349,12 +357,9 @@ def exercise_matches_filters(
 
 
 def render_workout_generator_page() -> None:
-    """Render the original random workout generator page."""
+    """Render paired weighted and bodyweight workouts for the selected day."""
     st.header("Generate Workout")
 
-    # Load the workout day templates from the finished JSON data file. The dropdown
-    # shows friendly names while the app keeps the matching template id behind the
-    # scenes for the generator.
     templates = load_templates()
     template_names = [template["name"] for template in templates]
     selected_template_name = st.selectbox("Workout day / template", template_names)
@@ -362,48 +367,23 @@ def render_workout_generator_page() -> None:
         template for template in templates if template["name"] == selected_template_name
     )
 
-    # Let the user choose whether they want a weighted workout or a bodyweight-first
-    # workout. The lowercase value is passed directly into generator.py.
-    mode = st.radio("Mode", ["weighted", "bodyweight"], horizontal=True)
-
     # The button prevents a new random workout from appearing on every widget change.
-    # A workout is only created when the user explicitly asks for one.
+    # A paired view is created only when the user explicitly asks for one.
     if st.button("Generate Workout"):
-        workout = generate_workout(selected_template["id"], mode)
+        weighted_workout = generate_workout(selected_template["id"], "weighted")
+        bodyweight_workout = generate_workout(selected_template["id"], "bodyweight")
 
-        st.subheader(workout["template_name"])
-        st.caption(f"Mode: {workout['mode'].title()}")
+        st.subheader(weighted_workout["template_name"])
+        st.caption("Weighted on the left · Bodyweight on the right")
+        st.markdown("---")
 
-        if workout.get("template_description"):
-            st.write(workout["template_description"])
+        weighted_column, bodyweight_column = st.columns(2, gap="large")
 
-        # Display each generated exercise with beginner-friendly labels so the user
-        # can understand why it was selected and what set/rep target to use.
-        for number, exercise in enumerate(workout["exercises"], start=1):
-            st.markdown(f"### {number}. {exercise['name']}")
-            st.write(f"**Template slot:** {exercise['slot_name']}")
-            st.write(f"**Movement pattern:** {exercise['movement_pattern']}")
-            st.write(
-                "**Primary muscles:** "
-                + (", ".join(exercise["primary_muscles"]) or "Not listed")
-            )
-            st.write(
-                "**Secondary muscles:** "
-                + (", ".join(exercise["secondary_muscles"]) or "Not listed")
-            )
-            st.write(
-                f"**Sets/Reps:** {exercise['sets']} sets of {exercise['reps']} reps"
-            )
+        with weighted_column:
+            render_workout_column("Weighted", weighted_workout)
 
-            diagram_path = exercise["diagram_path"]
-            diagram_file = BASE_DIR / diagram_path
-
-            # If the diagram file has already been added locally, show the image.
-            # Otherwise, show the intended path as placeholder text for now.
-            if diagram_file.exists():
-                st.image(str(diagram_file), caption=diagram_path)
-            else:
-                st.info(f"Diagram placeholder: {diagram_path}")
+        with bodyweight_column:
+            render_workout_column("Bodyweight", bodyweight_workout)
 
 
 def render_exercise_library_page() -> None:
