@@ -1,0 +1,4 @@
+[client]
+# Keep Streamlit's automatic multipage navigation hidden so the existing
+# MarshallFit sidebar remains the only app navigation outside the TV page.
+showSidebarNavigation = false
