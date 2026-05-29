@@ -1,14 +1,14 @@
 # Marshall Fit Workout Generator
 
-Marshall Fit is a private home-gym workout generator. The first version is planned as a simple Python CLI that will eventually create workouts from JSON data files.
+Marshall Fit is a private home-gym workout generator. The first version is a simple Python project that creates workouts from JSON data files and now includes a local Streamlit web interface.
 
 ## Current Status
 
-This repository currently contains the initial project scaffold only. It does **not** include the full workout-generation logic yet.
+This repository contains the starter workout generator, completed JSON data files, and a first simple Streamlit user interface.
 
 ## Project Folders
 
-- `data/` — starter JSON files for equipment, exercises, and workout templates.
+- `data/` — JSON files for equipment, exercises, and workout templates.
 - `diagrams/` — future home for reusable exercise diagram images.
 - `docs/` — planning and project documentation.
 - `output/` — future generated workout files, such as Markdown or HTML exports.
@@ -16,11 +16,28 @@ This repository currently contains the initial project scaffold only. It does **
 
 ## Starter Files
 
+- `app.py` — local Streamlit web interface for generating workouts.
 - `cli.py` — beginner-friendly command-line entry point. Run it with `python cli.py`.
-- `generator.py` — placeholder module for the future workout-generation engine.
-- `data/equipment.json` — placeholder equipment catalog data.
-- `data/exercises.json` — placeholder exercise library data.
-- `data/templates.json` — placeholder workout template data.
+- `generator.py` — importable workout-generation engine used by the interface.
+- `data/equipment.json` — equipment catalog data.
+- `data/exercises.json` — exercise library data.
+- `data/templates.json` — workout template data.
+
+## Run the Streamlit Interface
+
+Install Streamlit:
+
+```bash
+pip install streamlit
+```
+
+Start the local web app:
+
+```bash
+streamlit run app.py
+```
+
+Then use the page to choose a workout template, select weighted or bodyweight mode, and click **Generate Workout**.
 
 ## Try the Starter CLI
 
