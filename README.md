@@ -50,3 +50,27 @@ Expected output:
 ```text
 Marshall Fit Workout Generator
 ```
+
+## Today's Workout TV Display
+
+Marshall Fit includes a display-only **Today's Workout** page for a 32-inch TV in portrait orientation. It is intended for showing the workout of the day only, so it does not include workout generation, editing, sharing, star, toolbar, or utility controls.
+
+Open it locally after starting Streamlit:
+
+```bash
+streamlit run app.py
+```
+
+Then browse directly to:
+
+```text
+http://localhost:8501/today
+```
+
+For the best TV setup:
+
+- Rotate the TV or display to portrait mode, ideally around a 9:16 aspect ratio.
+- Open the `/today` page URL directly.
+- Use browser full-screen mode, usually **F11**.
+- Optionally use the page's **Enter Full Screen** button or press **F** if the browser allows page-triggered full-screen.
+- If a workout is saved in the Scheduler for today's date, the TV page shows that workout. If not, it creates a deterministic date-based workout so the same workout appears for the same day.
