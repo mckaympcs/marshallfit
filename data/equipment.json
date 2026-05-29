@@ -1,4 +1,154 @@
-{
-  "_comment": "Beginner note: this file will list the equipment available in the Marshall Fit gym. The generator will eventually use it to avoid choosing exercises that need unavailable equipment.",
-  "equipment": []
-}
+[
+  {
+    "id": "power-rack",
+    "name": "Marshall Fit Power Rack",
+    "category": "rack",
+    "notes": "Heavy commercial-style rack with white laser-numbered uprights and black hardware. Serves as the hub for rack-mounted stations and attachments. No jammer arms; the bulky black upright units are cable system housings.",
+    "stations": [
+      {
+        "id": "integrated-dual-cable-system",
+        "name": "Integrated Dual Cable System",
+        "category": "cable_station",
+        "notes": "Two selectorized cable columns built into the rack. Each side is capped at 150 lb for single-arm or single-side loading; linked sides provide up to 300 lb total loading."
+      },
+      {
+        "id": "multi-grip-pull-up-bar",
+        "name": "Multi-Grip Pull-Up Bar",
+        "category": "bodyweight_station",
+        "notes": "Fixed top pull-up bar with neutral, wide, and standard grip options."
+      },
+      {
+        "id": "rack-mounted-dip-station",
+        "name": "Rack-Mounted Dip Station",
+        "category": "bodyweight_station",
+        "notes": "Corner-mounted rack dip attachment."
+      },
+      {
+        "id": "bts-smith-attachment",
+        "name": "BTS Smith Attachment",
+        "category": "rack_attachment",
+        "notes": "Bulletproof Fitness Victor-Tony-Snake guided Smith rail attachment that runs on the rack uprights."
+      },
+      {
+        "id": "landmine-attachment",
+        "name": "Landmine Attachment",
+        "category": "rack_attachment",
+        "notes": "Rack-mounted landmine pivot that loads a barbell."
+      },
+      {
+        "id": "pritchett-pad",
+        "name": "Pritchett Pad",
+        "category": "rack_attachment",
+        "notes": "Chest-supported pad that connects to the rack for supported rowing setups."
+      },
+      {
+        "id": "rogue-leg-roller-hip-thrust-attachment",
+        "name": "Rogue Leg Roller / Hip-Thrust Attachment",
+        "category": "rack_attachment",
+        "notes": "Padded roller mounted to the rack for hip-thrust and leg-support setups."
+      },
+      {
+        "id": "spotter-arms-j-cups",
+        "name": "Spotter Arms + J-Cups",
+        "category": "rack_attachment",
+        "notes": "Rack safety arms and barbell hooks for secure barbell setup and safeties."
+      }
+    ]
+  },
+  {
+    "id": "bulletproof-isolator-leg-developer",
+    "name": "Bulletproof Isolator with Leg Developer",
+    "category": "isolation_machine",
+    "notes": "Standalone multi-isolation attachment currently stored on the floor. Includes the leg developer roller pad. Confirm the full Bulletproof Isolator movement chart before expanding supported movements."
+  },
+  {
+    "id": "dumbbells",
+    "name": "Dumbbells",
+    "category": "free_weights",
+    "notes": "Hex/rubber dumbbells from 5 to 125 lb: 5 lb increments from 5 to 60, 10 lb increments from 60 to 110, and 5 lb increments from 110 to 125."
+  },
+  {
+    "id": "barbells",
+    "name": "Barbells",
+    "category": "free_weights",
+    "notes": "Includes 2 Rogue Ohio Bars at 45 lb, 2 Rogue Bella Bars at 35 lb with 25 mm shafts, 1 generic 45 lb Olympic bar, and 1 EZ curl bar."
+  },
+  {
+    "id": "bumper-plates",
+    "name": "Bumper Plates",
+    "category": "plates",
+    "notes": "Rogue bumper plates including green 25s, blue 45s, yellow/black 35s, and training plates."
+  },
+  {
+    "id": "iron-plates",
+    "name": "Iron Plates",
+    "category": "plates",
+    "notes": "Cast-iron Olympic plates."
+  },
+  {
+    "id": "kettlebells",
+    "name": "Kettlebells",
+    "category": "free_weights",
+    "notes": "Row of Rogue kettlebells."
+  },
+  {
+    "id": "med-slam-ball",
+    "name": "Med / Slam Ball",
+    "category": "conditioning",
+    "notes": "Single medicine or slam ball."
+  },
+  {
+    "id": "adjustable-fid-bench",
+    "name": "Adjustable FID Bench",
+    "category": "bench",
+    "notes": "Flat, incline, and decline adjustable bench for free-weight and supported setups."
+  },
+  {
+    "id": "atg-usa-platform",
+    "name": "ATG USA Platform",
+    "category": "platform",
+    "notes": "Squat and elevation board for raised and deficit setup options."
+  },
+  {
+    "id": "resistance-bands",
+    "name": "Resistance Bands",
+    "category": "accessory",
+    "notes": "Resistance bands stored with the gym accessories."
+  },
+  {
+    "id": "ab-roller",
+    "name": "Ab Roller",
+    "category": "accessory",
+    "notes": "Ab roller stored with the gym accessories."
+  },
+  {
+    "id": "suspension-straps",
+    "name": "Suspension Straps",
+    "category": "accessory",
+    "notes": "TRX-style suspension straps."
+  },
+  {
+    "id": "rogue-mag-grip-handles",
+    "name": "Rogue MAG Grip Handles",
+    "category": "cable_attachment",
+    "notes": "Rogue MAG grip handles for the cable system, stored on the rack pegboard."
+  },
+  {
+    "id": "tricep-ropes",
+    "name": "Tricep Ropes",
+    "category": "cable_attachment",
+    "notes": "Rope attachments for the cable system, stored on the rack pegboard."
+  },
+  {
+    "id": "v-bars",
+    "name": "V-Bars",
+    "category": "cable_attachment",
+    "notes": "V-bar cable attachments stored on the rack pegboard."
+  },
+  {
+    "id": "assorted-cable-attachments",
+    "name": "Assorted Cable Attachments",
+    "category": "cable_attachment",
+    "notes": "Assorted cable attachments stored on the rack pegboard."
+  }
+]
