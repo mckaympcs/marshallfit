@@ -13,7 +13,6 @@ import random
 from pathlib import Path
 from typing import Any
 
-
 # These paths are relative to this file, so the generator works even if the
 # command is started from a different folder.
 BASE_DIR = Path(__file__).resolve().parent
@@ -98,6 +97,36 @@ def generate_workout(template_id: str, mode: str = "weighted") -> dict[str, Any]
     }
 
 
+def regenerate_exercise(
+    template_id: str,
+    mode: str,
+    slot_id: str,
+    current_exercises: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Regenerate a single exercise for one template slot.
+
+    The caller passes the currently displayed exercises so the replacement can
+    avoid duplicating exercises already present in the workout whenever the
+    exercise library has enough alternatives.
+    """
+    if mode not in {"weighted", "bodyweight"}:
+        raise ValueError('mode must be either "weighted" or "bodyweight"')
+
+    template = get_template_by_id(template_id)
+    slot = next((item for item in template["slots"] if item["id"] == slot_id), None)
+    if slot is None:
+        raise ValueError(f"Unknown template slot id: {slot_id}")
+
+    used_exercise_ids = {
+        exercise.get("exercise_id")
+        for exercise in current_exercises or []
+        if exercise.get("slot_id") != slot_id and exercise.get("exercise_id")
+    }
+    exercises = load_exercises()
+    replacement = _choose_exercise_for_slot(slot, exercises, mode, used_exercise_ids)
+    return _format_generated_exercise(slot, replacement)
+
+
 def _choose_exercise_for_slot(
     slot: dict[str, Any],
     exercises: list[dict[str, Any]],
@@ -165,7 +194,9 @@ def _format_generated_exercise(
     sets, reps = _prescribe_sets_and_reps(slot, exercise)
 
     return {
+        "slot_id": slot["id"],
         "slot_name": slot["name"],
+        "exercise_id": exercise["id"],
         "name": exercise["name"],
         "category": _exercise_category(slot, exercise),
         "movement_pattern": _friendly_list(exercise.get("movement_patterns", [])),
