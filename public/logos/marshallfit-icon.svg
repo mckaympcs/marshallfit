@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MarshallFit">
+  <rect width="512" height="512" rx="96" fill="#050608"/>
+  <circle cx="256" cy="256" r="178" fill="none" stroke="#f9fafb" stroke-width="34"/>
+  <path d="M124 332V180h58l74 76 74-76h58v152h-58V251l-74 72-74-72v81z" fill="#f9fafb"/>
+  <path d="M82 430 430 82" stroke="#ef4444" stroke-width="14" stroke-linecap="round"/>
+</svg>
