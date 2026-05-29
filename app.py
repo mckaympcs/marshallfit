@@ -89,16 +89,16 @@ st.markdown(
                 linear-gradient(135deg, rgba(255, 76, 90, 0.12), rgba(255, 185, 68, 0.16)),
                 #f8fafc;
             border: 1px dashed rgba(255, 76, 90, 0.45);
-            border-radius: 18px;
+            border-radius: 14px;
             color: #475569;
             display: flex;
             flex-direction: column;
-            font-size: 0.82rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            gap: 0.35rem;
+            gap: 0.2rem;
             justify-content: center;
-            min-height: 132px;
-            padding: 1rem;
+            min-height: 86px;
+            padding: 0.65rem;
             text-align: center;
             text-transform: uppercase;
         }
@@ -108,6 +108,26 @@ st.markdown(
             font-weight: 800;
             line-height: 1.18;
             margin: 0 0 0.1rem;
+        .diagram-placeholder span {
+            display: block;
+            font-size: 1.35rem;
+            line-height: 1;
+        }
+
+        .workout-column-title {
+            color: #111827;
+            font-size: 1.08rem;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            margin: 0 0 0.55rem;
+            text-transform: uppercase;
+        }
+
+        .exercise-title {
+            font-size: 1.08rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin: 0 0 0.18rem;
         }
 
         .exercise-category {
@@ -116,6 +136,9 @@ st.markdown(
             font-weight: 700;
             letter-spacing: 0.04em;
             margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            margin: 0;
             text-transform: uppercase;
         }
 
@@ -152,10 +175,22 @@ st.markdown(
             font-size: 0.8rem;
             font-weight: 700;
             margin-top: 0.45rem;
+            font-size: 0.86rem;
+            font-weight: 900;
+            line-height: 1.1;
+            padding: 0.45rem 0.72rem;
+            text-align: center;
+            white-space: nowrap;
         }
     </style>
     """,
     unsafe_allow_html=True,
+)
+
+st.title("Marshall Fit Workout Generator")
+st.write(
+    "Generate paired six-exercise weighted and bodyweight workouts with compact "
+    "diagram, movement type, and set/rep rows."
 )
 
 
@@ -200,6 +235,65 @@ def list_to_cell(value: Any) -> str:
         return ", ".join(str(item) for item in value)
 
     return "" if value is None else str(value)
+
+
+def render_diagram(exercise: dict[str, Any]) -> None:
+    """Render an exercise diagram or a compact placeholder in its position."""
+    diagram_path = exercise["diagram_path"]
+    diagram_file = BASE_DIR / diagram_path
+
+    if diagram_file.exists():
+        st.image(str(diagram_file), use_container_width=True)
+    else:
+        st.markdown(
+            """
+            <div class="diagram-placeholder">
+                <span>↔</span>
+                Diagram
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+
+def render_exercise_row(exercise: dict[str, Any]) -> None:
+    """Render one compact generated-workout row."""
+    with st.container(border=True):
+        diagram_column, details_column, prescription_column = st.columns(
+            [0.95, 1.75, 0.95], gap="small", vertical_alignment="center"
+        )
+
+        with diagram_column:
+            render_diagram(exercise)
+
+        with details_column:
+            st.markdown(
+                f'<div class="exercise-title">{exercise["name"]}</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f'<div class="exercise-category">{exercise["category"]}</div>',
+                unsafe_allow_html=True,
+            )
+
+        with prescription_column:
+            st.markdown(
+                '<div class="sets-reps-pill">'
+                f"{exercise['sets']} sets × {exercise['reps']} reps"
+                "</div>",
+                unsafe_allow_html=True,
+            )
+
+
+def render_workout_column(title: str, workout: dict[str, Any]) -> None:
+    """Render six generated exercises for one workout mode."""
+    st.markdown(
+        f'<div class="workout-column-title">{title}</div>',
+        unsafe_allow_html=True,
+    )
+
+    for exercise in workout["exercises"][:6]:
+        render_exercise_row(exercise)
 
 
 def cell_to_list(value: Any) -> list[str]:
@@ -438,6 +532,8 @@ def render_workout_generator_page() -> None:
         "Generate weighted and non-weighted options for the same workout day, then "
         "regenerate the full workout or any individual exercise slot."
     )
+    """Render paired weighted and bodyweight workouts for the selected day."""
+    st.header("Generate Workout")
 
     templates = load_templates()
     template_names = [template["name"] for template in templates]
@@ -668,6 +764,23 @@ def render_scheduler_page() -> None:
         render_scheduler_day_view()
     else:
         render_scheduler_calendar()
+    # The button prevents a new random workout from appearing on every widget change.
+    # A paired view is created only when the user explicitly asks for one.
+    if st.button("Generate Workout"):
+        weighted_workout = generate_workout(selected_template["id"], "weighted")
+        bodyweight_workout = generate_workout(selected_template["id"], "bodyweight")
+
+        st.subheader(weighted_workout["template_name"])
+        st.caption("Weighted on the left · Bodyweight on the right")
+        st.markdown("---")
+
+        weighted_column, bodyweight_column = st.columns(2, gap="large")
+
+        with weighted_column:
+            render_workout_column("Weighted", weighted_workout)
+
+        with bodyweight_column:
+            render_workout_column("Bodyweight", bodyweight_workout)
 
 
 def render_exercise_library_page() -> None:
