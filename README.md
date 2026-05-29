@@ -73,4 +73,4 @@ For the best TV setup:
 - Open the `/today` page URL directly.
 - Use browser full-screen mode, usually **F11**.
 - Optionally use the page's **Enter Full Screen** button or press **F** if the browser allows page-triggered full-screen.
-- If a workout is saved in the Scheduler for today's date, the TV page shows that workout. If not, it creates a deterministic date-based workout so the same workout appears for the same day.
+- If a workout is saved in the Scheduler for today's date, the TV page shows both the saved weighted and bodyweight columns. If not, it creates deterministic date-based weighted and bodyweight columns so the same two workouts appear for the same day.
