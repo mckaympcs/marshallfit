@@ -35,27 +35,36 @@ def load_schedule() -> dict[str, Any]:
 
 
 def deterministic_workout_for_date(workout_date: date) -> dict[str, Any]:
-    """Generate the fallback workout that should be stable for one calendar day."""
+    """Generate fallback workouts that should be stable for one calendar day."""
     workout_types = list(WORKOUT_TYPE_TO_TEMPLATE)
     workout_type = workout_types[workout_date.toordinal() % len(workout_types)]
     template_id = WORKOUT_TYPE_TO_TEMPLATE[workout_type]
 
-    # The generator intentionally uses randomness for the interactive app. For
-    # the TV display fallback, seed that same engine only during this call so the
-    # same date produces the same exercise list without changing the generator.
+    generated_workouts: dict[str, list[dict[str, Any]]] = {}
     previous_random_state = random.getstate()
-    random.seed(f"marshallfit-today-{workout_date.isoformat()}-{template_id}")
     try:
-        generated_workout = generator.generate_workout(template_id, "weighted")
+        for mode in ("weighted", "bodyweight"):
+            # The generator intentionally uses randomness for the interactive app.
+            # For the TV display fallback, seed that same engine for each column
+            # only during this call so both plans remain stable without changing
+            # the generator itself.
+            random.seed(
+                f"marshallfit-today-{workout_date.isoformat()}-{template_id}-{mode}"
+            )
+            generated_workouts[mode] = generator.generate_workout(template_id, mode)[
+                "exercises"
+            ]
     finally:
         random.setstate(previous_random_state)
 
     return {
         "date": workout_date.isoformat(),
         "workoutType": workout_type,
-        "displayMode": "Weighted",
+        "displayMode": "Weighted + Bodyweight",
         "source": "Date-based daily rotation",
-        "exercises": generated_workout["exercises"],
+        "weightedExercises": generated_workouts["weighted"],
+        "bodyweightExercises": generated_workouts["bodyweight"],
+        "exercises": generated_workouts["weighted"],
     }
 
 
@@ -67,19 +76,15 @@ def todays_workout(workout_date: date | None = None) -> dict[str, Any]:
     if scheduled_workout:
         weighted_exercises = scheduled_workout.get("weightedExercises", [])
         bodyweight_exercises = scheduled_workout.get("nonWeightedExercises", [])
-        if weighted_exercises:
-            display_mode = "Weighted"
-            exercises = weighted_exercises
-        else:
-            display_mode = "Non-Weighted"
-            exercises = bodyweight_exercises
 
         return {
             "date": selected_date.isoformat(),
             "workoutType": scheduled_workout.get("workoutType", "Scheduled Workout"),
-            "displayMode": display_mode,
+            "displayMode": "Weighted + Bodyweight",
             "source": "Saved scheduler workout",
-            "exercises": exercises,
+            "weightedExercises": weighted_exercises,
+            "bodyweightExercises": bodyweight_exercises,
+            "exercises": weighted_exercises or bodyweight_exercises,
         }
 
     return deterministic_workout_for_date(selected_date)
