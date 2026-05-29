@@ -162,17 +162,75 @@ def _format_generated_exercise(
 ) -> dict[str, Any]:
     """Combine slot prescription details with exercise-library details."""
     muscle_focus = exercise.get("muscle_focus", [])
+    sets, reps = _prescribe_sets_and_reps(slot, exercise)
 
     return {
         "slot_name": slot["name"],
         "name": exercise["name"],
+        "category": _exercise_category(slot, exercise),
         "movement_pattern": _friendly_list(exercise.get("movement_patterns", [])),
         "primary_muscles": muscle_focus[:1],
         "secondary_muscles": muscle_focus[1:],
-        "sets": slot["sets"],
-        "reps": slot["reps"],
+        "sets": sets,
+        "reps": reps,
         "diagram_path": _find_diagram_path(exercise),
     }
+
+
+def _prescribe_sets_and_reps(
+    slot: dict[str, Any], exercise: dict[str, Any]
+) -> tuple[int, str]:
+    """Return a simple set/rep target based on the exercise type.
+
+    The app keeps working sets consistent at three per exercise, then adjusts
+    the rep range by role: heavy compound lifts stay lower, accessories sit in
+    the moderate hypertrophy range, and isolations/bodyweight moves can go a
+    little higher.
+    """
+    role = exercise.get("exercise_role") or slot.get("exercise_role", "")
+    movement_patterns = set(exercise.get("movement_patterns", []))
+    unilateral_suffix = " each side" if exercise.get("unilateral") else ""
+
+    if role == "compound_primary":
+        return 3, f"6-8{unilateral_suffix}"
+
+    if role in {"compound_accessory", "power", "accessory"}:
+        return 3, f"8-10{unilateral_suffix}"
+
+    if role in {"isolation", "accessory_mobility"}:
+        return 3, f"10-12{unilateral_suffix}"
+
+    if exercise.get("bodyweight"):
+        return 3, f"8-12{unilateral_suffix}"
+
+    if movement_patterns.intersection(
+        {
+            "horizontal_push",
+            "incline_push",
+            "vertical_push",
+            "horizontal_pull",
+            "vertical_pull",
+            "quad_compound",
+            "hip_hinge",
+        }
+    ):
+        return 3, f"6-8{unilateral_suffix}"
+
+    return int(slot.get("sets", 3)), str(slot.get("reps", f"8-10{unilateral_suffix}"))
+
+
+def _exercise_category(slot: dict[str, Any], exercise: dict[str, Any]) -> str:
+    """Return the short subtitle shown below each exercise name."""
+    role = exercise.get("exercise_role") or slot.get("exercise_role", "")
+    movement_patterns = exercise.get("movement_patterns", [])
+
+    role_label = role.replace("_", " ").title()
+    pattern_label = _friendly_list(movement_patterns[:1])
+
+    if role_label and pattern_label:
+        return f"{role_label} · {pattern_label}"
+
+    return role_label or slot["name"]
 
 
 def _find_diagram_path(exercise: dict[str, Any]) -> str:
