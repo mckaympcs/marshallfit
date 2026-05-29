@@ -264,17 +264,30 @@ def _exercise_category(slot: dict[str, Any], exercise: dict[str, Any]) -> str:
     return role_label or slot["name"]
 
 
-def _find_diagram_path(exercise: dict[str, Any]) -> str:
-    """Return a diagram path from data, or a predictable future placeholder."""
-    if exercise.get("diagram_path"):
-        return exercise["diagram_path"]
+def resolve_diagram_path(exercise_id: str, configured_path: str | None = None) -> str:
+    """Return the local diagram path for an exercise id.
+
+    Exercise diagrams are stored in ``diagrams/`` and named after the stable
+    exercise id from ``data/exercises.json``. A configured path is still
+    honored when it points at an existing file so older data can keep working,
+    but generated workout cards default to the id-matched PNG files.
+    """
+    if configured_path:
+        configured_file = BASE_DIR / configured_path
+        if configured_file.exists():
+            return str(configured_file.relative_to(BASE_DIR))
 
     for extension in (".png", ".jpg", ".jpeg", ".svg", ".webp"):
-        diagram_path = DIAGRAMS_DIR / f"{exercise['id']}{extension}"
+        diagram_path = DIAGRAMS_DIR / f"{exercise_id}{extension}"
         if diagram_path.exists():
             return str(diagram_path.relative_to(BASE_DIR))
 
-    return f"diagrams/{exercise['id']}.png"
+    return f"diagrams/{exercise_id}.png"
+
+
+def _find_diagram_path(exercise: dict[str, Any]) -> str:
+    """Return the exercise diagram path used by generated workout cards."""
+    return resolve_diagram_path(exercise["id"], exercise.get("diagram_path"))
 
 
 def _friendly_list(values: list[str]) -> str:

@@ -15,7 +15,12 @@ from typing import Any, Callable
 
 import streamlit as st
 
-from generator import generate_workout, load_templates, regenerate_exercise
+from generator import (
+    generate_workout,
+    load_templates,
+    regenerate_exercise,
+    resolve_diagram_path,
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 EXERCISES_PATH = BASE_DIR / "data" / "exercises.json"
@@ -512,9 +517,13 @@ def cell_to_list(value: Any) -> list[str]:
 
 
 def render_diagram(exercise: dict[str, Any]) -> None:
-    """Render an exercise diagram or a compact placeholder in its position."""
-    diagram_path = exercise["diagram_path"]
-    diagram_file = BASE_DIR / diagram_path
+    """Render the id-matched exercise diagram or a compact fallback placeholder."""
+    exercise_id = exercise.get("exercise_id") or exercise.get("id")
+    diagram_path = exercise.get("diagram_path")
+    if exercise_id:
+        diagram_path = resolve_diagram_path(str(exercise_id), diagram_path)
+
+    diagram_file = BASE_DIR / str(diagram_path or "")
     if diagram_file.exists():
         st.image(str(diagram_file), use_container_width=True)
     else:
