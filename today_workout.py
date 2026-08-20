@@ -23,6 +23,15 @@ WORKOUT_TYPE_TO_TEMPLATE = {
     "Lower Body": "lower_body",
     "Upper Body": "upper_body",
 }
+WEEKDAY_WORKOUTS = {
+    0: ("Chest / Triceps", "chest_triceps"),
+    1: ("Back / Biceps", "back_biceps"),
+    2: ("Legs", "lower_body"),
+    3: ("Rest Day", None),
+    4: ("Upper Body", "upper_body"),
+    5: ("Lower Body", "lower_body"),
+    6: ("Rest Day", None),
+}
 
 
 def load_schedule() -> dict[str, Any]:
@@ -35,36 +44,36 @@ def load_schedule() -> dict[str, Any]:
 
 
 def deterministic_workout_for_date(workout_date: date) -> dict[str, Any]:
-    """Generate fallback workouts that should be stable for one calendar day."""
-    workout_types = list(WORKOUT_TYPE_TO_TEMPLATE)
-    workout_type = workout_types[workout_date.toordinal() % len(workout_types)]
-    template_id = WORKOUT_TYPE_TO_TEMPLATE[workout_type]
+    """Generate the weekday's weighted fallback, keeping it stable all day."""
+    workout_type, template_id = WEEKDAY_WORKOUTS[workout_date.weekday()]
+    if template_id is None:
+        return {
+            "date": workout_date.isoformat(),
+            "workoutType": workout_type,
+            "displayMode": "Rest Day",
+            "source": "Weekly default schedule",
+            "isRestDay": True,
+            "weightedExercises": [],
+            "exercises": [],
+        }
 
-    generated_workouts: dict[str, list[dict[str, Any]]] = {}
     previous_random_state = random.getstate()
     try:
-        for mode in ("weighted", "bodyweight"):
-            # The generator intentionally uses randomness for the interactive app.
-            # For the TV display fallback, seed that same engine for each column
-            # only during this call so both plans remain stable without changing
-            # the generator itself.
-            random.seed(
-                f"marshallfit-today-{workout_date.isoformat()}-{template_id}-{mode}"
-            )
-            generated_workouts[mode] = generator.generate_workout(template_id, mode)[
-                "exercises"
-            ]
+        # The interactive generator uses randomness. Isolate and seed it so a
+        # generated daily plan stays unchanged across page refreshes.
+        random.seed(f"marshallfit-today-{workout_date.isoformat()}-{template_id}-weighted")
+        exercises = generator.generate_workout(template_id, "weighted")["exercises"]
     finally:
         random.setstate(previous_random_state)
 
     return {
         "date": workout_date.isoformat(),
         "workoutType": workout_type,
-        "displayMode": "Weighted + Bodyweight",
-        "source": "Date-based daily rotation",
-        "weightedExercises": generated_workouts["weighted"],
-        "bodyweightExercises": generated_workouts["bodyweight"],
-        "exercises": generated_workouts["weighted"],
+        "displayMode": "Weighted",
+        "source": "Weekly default schedule",
+        "isRestDay": False,
+        "weightedExercises": exercises,
+        "exercises": exercises,
     }
 
 
@@ -75,16 +84,15 @@ def todays_workout(workout_date: date | None = None) -> dict[str, Any]:
 
     if scheduled_workout:
         weighted_exercises = scheduled_workout.get("weightedExercises", [])
-        bodyweight_exercises = scheduled_workout.get("nonWeightedExercises", [])
 
         return {
             "date": selected_date.isoformat(),
             "workoutType": scheduled_workout.get("workoutType", "Scheduled Workout"),
-            "displayMode": "Weighted + Bodyweight",
+            "displayMode": "Weighted",
             "source": "Saved scheduler workout",
+            "isRestDay": False,
             "weightedExercises": weighted_exercises,
-            "bodyweightExercises": bodyweight_exercises,
-            "exercises": weighted_exercises or bodyweight_exercises,
+            "exercises": weighted_exercises,
         }
 
     return deterministic_workout_for_date(selected_date)

@@ -137,7 +137,7 @@ def exercise_card(exercise: dict[str, Any], number: int) -> str:
 
 
 def workout_column(title: str, exercises: list[dict[str, Any]]) -> str:
-    """Build one display-only workout column for the TV grid."""
+    """Build the display-only weighted workout panel."""
     if not exercises:
         cards_markup = '<div class="empty-column">No exercises scheduled for this column.</div>'
     else:
@@ -156,8 +156,20 @@ def workout_column(title: str, exercises: list[dict[str, Any]]) -> str:
     ).strip()
 
 
+def rest_day_board() -> str:
+    """Build the intentionally simple board used on weekly rest days."""
+    return dedent(
+        """
+        <section class="rest-day-board" aria-label="Rest day">
+            <div class="rest-day-kicker">Recovery is part of the program</div>
+            <div class="rest-day-title">REST DAY</div>
+        </section>
+        """
+    ).strip()
+
+
 def inject_today_styles() -> None:
-    """Add TV-route CSS for the compact header, two-column layout, and hidden Streamlit chrome."""
+    """Add TV-route CSS for the full-width workout and hidden Streamlit chrome."""
     st.markdown(
         """
         <style>
@@ -198,7 +210,7 @@ def inject_today_styles() -> None:
                 padding: clamp(0.7rem, 1.6vh, 1.35rem) clamp(0.75rem, 2.4vw, 2.3rem) clamp(0.75rem, 1.8vh, 1.5rem);
             }
 
-            /* TV-specific layout: compact centered brand/date header above two fixed workout columns. */
+            /* TV-specific layout: compact header above one full-width workout. */
             .today-tv-shell {
                 width: 100%;
                 min-height: calc(100vh - 2rem);
@@ -245,7 +257,7 @@ def inject_today_styles() -> None:
 
             .workout-grid {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                grid-template-columns: minmax(0, 1fr);
                 gap: clamp(0.75rem, 1.8vw, 1.6rem);
                 align-items: start;
                 flex: 1 1 auto;
@@ -394,6 +406,37 @@ def inject_today_styles() -> None:
                 text-align: center;
             }
 
+            .rest-day-board {
+                min-height: clamp(24rem, 68vh, 64rem);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid rgba(239, 68, 68, 0.3);
+                border-radius: clamp(1.2rem, 2.5vw, 2rem);
+                background: radial-gradient(circle at 50% 45%, rgba(239, 68, 68, 0.2), rgba(15, 23, 42, 0.64) 48%, rgba(3, 4, 7, 0.72));
+                box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.3);
+                text-align: center;
+            }
+
+            .rest-day-kicker {
+                color: var(--today-gold);
+                font-size: clamp(0.7rem, 1.4vw, 1.15rem);
+                font-weight: 900;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+            }
+
+            .rest-day-title {
+                margin-top: 0.35rem;
+                color: #ffffff;
+                font-size: clamp(4rem, 13vw, 10rem);
+                font-weight: 1000;
+                letter-spacing: -0.07em;
+                line-height: 0.95;
+                text-shadow: 0 1rem 3rem rgba(239, 68, 68, 0.32);
+            }
+
             .today-footer-bar {
                 height: clamp(0.35rem, 0.65vh, 0.6rem);
                 border-radius: 999px;
@@ -489,7 +532,11 @@ def render_today_page() -> None:
     """Render the complete display-only TV page."""
     workout = todays_workout(date.today())
     weighted_exercises = workout.get("weightedExercises") or workout.get("exercises", [])
-    bodyweight_exercises = workout.get("bodyweightExercises") or workout.get("nonWeightedExercises", [])
+    workout_content = (
+        rest_day_board()
+        if workout.get("isRestDay")
+        else f'<div class="workout-grid">{workout_column("Weighted", weighted_exercises)}</div>'
+    )
 
     inject_today_styles()
     render_fullscreen_helper()
@@ -500,10 +547,7 @@ def render_today_page() -> None:
                 {logo_markup()}
                 <div class="today-date">{html_escape(friendly_date(workout['date']))}</div>
             </section>
-            <div class="workout-grid">
-                {workout_column('Weighted', weighted_exercises)}
-                {workout_column('Bodyweight', bodyweight_exercises)}
-            </div>
+            {workout_content}
             <div class="today-footer-bar" aria-hidden="true"></div>
         </main>
         """
