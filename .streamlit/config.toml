@@ -1,4 +1,13 @@
 [client]
-# Keep Streamlit's automatic multipage navigation hidden so the existing
+# Keep Streamlit's automatic multipage navigation hidden so the custom
 # MarshallFit sidebar remains the only app navigation outside the TV page.
 showSidebarNavigation = false
+
+[theme]
+# Real dark theme so native widgets (inputs, dropdowns, tables, popovers)
+# match the app instead of being painted over with CSS.
+base = "dark"
+primaryColor = "#ef4444"
+backgroundColor = "#0b0f17"
+secondaryBackgroundColor = "#151c2b"
+textColor = "#f1f5f9"

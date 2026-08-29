@@ -62,12 +62,12 @@ WORKOUT_TYPE_COLORS = {
     "Upper Body": {"bg": "rgba(234, 179, 8, 0.16)", "border": "#eab308", "text": "#fef08a"},
 }
 NAV_ITEMS = [
-    ("Dashboard", "Dashboard", "⌂"),
-    ("Workout Generator", "Workout Generator", "⚡"),
-    ("Scheduler", "Scheduler", "◴"),
-    ("Saved Workouts", "Saved Workouts", "▣"),
+    ("Dashboard", "Dashboard", ":material/home:"),
+    ("Workout Generator", "Workout Generator", ":material/bolt:"),
+    ("Scheduler", "Scheduler", ":material/calendar_month:"),
+    ("Saved Workouts", "Saved Workouts", ":material/bookmark:"),
 ]
-UTILITY_NAV_ITEMS = [("Exercise Library", "Exercise Library", "▣")]
+UTILITY_NAV_ITEMS = [("Exercise Library", "Exercise Library", ":material/fitness_center:")]
 LIST_FIELDS = [
     "movement_patterns",
     "muscle_focus",
@@ -103,120 +103,143 @@ st.set_page_config(page_title="MarshallFit", page_icon=ICON_LOGO_PATH, layout="w
 
 
 def inject_design_system() -> None:
-    """Apply the global dark gym dashboard design system."""
+    """Apply the global dark gym dashboard design system.
+
+    The base look comes from the real Streamlit dark theme in
+    ``.streamlit/config.toml``; this CSS only styles the custom components
+    (nav, masthead, cards, calendar) instead of repainting every widget.
+    """
     st.markdown(
         """
         <style>
             :root {
-                --mf-bg: #050608;
-                --mf-panel: rgba(15, 23, 42, 0.82);
-                --mf-panel-strong: rgba(17, 24, 39, 0.96);
-                --mf-card: rgba(15, 23, 42, 0.72);
-                --mf-border: rgba(148, 163, 184, 0.18);
-                --mf-border-strong: rgba(239, 68, 68, 0.42);
-                --mf-text: #f8fafc;
-                --mf-muted: #94a3b8;
+                --mf-panel: #10151f;
+                --mf-card: #151c2b;
+                --mf-border: rgba(148, 163, 184, 0.14);
+                --mf-text: #f1f5f9;
+                --mf-muted: #8f9bb0;
                 --mf-accent: #ef4444;
-                --mf-accent-2: #f59e0b;
+                --mf-accent-soft: rgba(239, 68, 68, 0.14);
+                --mf-radius: 14px;
+                --mf-day-h: 124px;
             }
 
             .stApp {
                 background:
-                    radial-gradient(circle at 18% 8%, rgba(239, 68, 68, 0.18), transparent 30rem),
-                    radial-gradient(circle at 90% 16%, rgba(245, 158, 11, 0.11), transparent 26rem),
-                    linear-gradient(135deg, #050608 0%, #090b10 46%, #111827 100%);
-                color: var(--mf-text);
+                    radial-gradient(circle at 15% 0%, rgba(239, 68, 68, 0.07), transparent 28rem),
+                    #0b0f17;
+            }
+
+            header[data-testid="stHeader"] {
+                background: transparent;
+            }
+
+            .stAppDeployButton {
+                display: none;
             }
 
             .block-container {
-                max-width: 1340px;
+                max-width: 1280px;
                 padding: 1.25rem 2rem 3.5rem;
             }
 
+            /* ---------- Sidebar navigation ---------- */
+
             [data-testid="stSidebar"] {
-                background: linear-gradient(180deg, #050608 0%, #0b1018 52%, #101827 100%);
+                background: var(--mf-panel);
                 border-right: 1px solid var(--mf-border);
-                box-shadow: 18px 0 45px rgba(0, 0, 0, 0.35);
             }
 
-            [data-testid="stSidebar"] img {
-                border-radius: 22px;
-                filter: drop-shadow(0 18px 35px rgba(239, 68, 68, 0.18));
+            [data-testid="stSidebar"] .stButton > button,
+            [data-testid="stSidebar"] [data-testid="stPageLink"] a {
+                background: transparent;
+                border: 1px solid transparent;
+                border-radius: 10px;
+                color: #c7d0de;
+                font-weight: 600;
+                justify-content: flex-start;
+                min-height: 2.6rem;
+                padding: 0.45rem 0.8rem;
+                text-align: left;
+                transition: background 140ms ease, color 140ms ease;
+                width: 100%;
             }
 
-            [data-testid="stSidebar"] [role="radiogroup"] label,
-            [data-testid="stSidebar"] .stButton > button {
-                border: 1px solid rgba(148, 163, 184, 0.14);
-                border-radius: 16px;
-                color: #e5e7eb;
-                font-weight: 800;
-                margin-bottom: 0.35rem;
-                min-height: 3rem;
-                transition: all 160ms ease;
-            }
-
-            [data-testid="stSidebar"] [role="radiogroup"] label:hover,
-            [data-testid="stSidebar"] .stButton > button:hover {
-                background: rgba(239, 68, 68, 0.12);
-                border-color: rgba(239, 68, 68, 0.44);
-                transform: translateX(2px);
-            }
-
-            [data-testid="stSidebar"] [role="radio"][aria-checked="true"] {
-                background: linear-gradient(135deg, rgba(239, 68, 68, 0.28), rgba(245, 158, 11, 0.12));
-                border-left: 4px solid #ef4444;
-                box-shadow: 0 12px 32px rgba(239, 68, 68, 0.16);
+            [data-testid="stSidebar"] .stButton > button:hover,
+            [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover {
+                background: rgba(248, 250, 252, 0.06);
+                border-color: transparent;
                 color: #ffffff;
             }
 
-            h1, h2, h3, h4, h5, h6, p, label, span, div {
-                color: inherit;
+            [data-testid="stSidebar"] .stButton > button[kind="primary"] {
+                background: var(--mf-accent-soft);
+                border-left: 3px solid var(--mf-accent);
+                border-radius: 4px 10px 10px 4px;
+                color: #ffffff;
             }
 
+            [data-testid="stSidebar"] .stButton > button:focus:not(:focus-visible) {
+                box-shadow: none;
+            }
+
+            [data-testid="stSidebar"] hr {
+                background: var(--mf-border);
+                margin: 0.9rem 0;
+            }
+
+            .sidebar-caption {
+                color: var(--mf-muted);
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.14em;
+                margin: 0.4rem 0 0.9rem;
+                text-transform: uppercase;
+            }
+
+            /* ---------- Typography ---------- */
+
             h1 {
-                font-size: clamp(2rem, 4vw, 4.1rem);
-                font-weight: 950;
-                letter-spacing: -0.055em;
+                font-size: clamp(1.8rem, 3vw, 2.5rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
                 margin-bottom: 0.2rem;
             }
 
             h2, h3 {
-                font-weight: 900;
-                letter-spacing: -0.025em;
+                font-weight: 750;
+                letter-spacing: -0.015em;
             }
+
+            /* ---------- Masthead and page header ---------- */
 
             .mf-masthead {
                 align-items: center;
-                background:
-                    linear-gradient(135deg, rgba(239, 68, 68, 0.16), transparent 32%),
-                    linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.92));
+                background: var(--mf-panel);
                 border: 1px solid var(--mf-border);
-                border-radius: 28px;
-                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+                border-radius: var(--mf-radius);
                 display: flex;
                 justify-content: center;
-                margin-bottom: 1.6rem;
-                min-height: 112px;
-                overflow: hidden;
-                padding: 1rem 1.4rem;
+                margin-bottom: 1.4rem;
+                padding: 1.1rem 1.4rem;
                 position: relative;
             }
 
             .mf-masthead::after {
-                background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.62), rgba(245, 158, 11, 0.58), transparent);
-                bottom: 0;
+                background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.55), transparent);
+                bottom: -1px;
                 content: "";
                 height: 1px;
-                left: 8%;
+                left: 10%;
                 position: absolute;
-                width: 84%;
+                width: 80%;
             }
 
             .mf-masthead img {
                 display: block;
                 height: auto;
-                max-height: 82px;
-                max-width: min(760px, 82vw);
+                max-height: 58px;
+                max-width: min(560px, 78vw);
                 object-fit: contain;
                 width: 100%;
             }
@@ -226,9 +249,9 @@ def inject_design_system() -> None:
             }
 
             .mf-page-kicker {
-                color: #fca5a5;
-                font-size: 0.76rem;
-                font-weight: 900;
+                color: #f87171;
+                font-size: 0.72rem;
+                font-weight: 700;
                 letter-spacing: 0.16em;
                 margin-bottom: 0.2rem;
                 text-transform: uppercase;
@@ -236,66 +259,43 @@ def inject_design_system() -> None:
 
             .mf-page-description {
                 color: var(--mf-muted);
-                font-size: 1.05rem;
-                margin-top: 0;
-                max-width: 820px;
+                font-size: 1rem;
+                margin-top: 0.15rem;
+                max-width: 760px;
             }
 
+            /* ---------- Panels, cards, buttons ---------- */
+
             div[data-testid="stVerticalBlockBorderWrapper"],
-            div[data-testid="stExpander"],
-            .stDataFrame, .stDataEditor {
-                background: rgba(15, 23, 42, 0.68);
+            div[data-testid="stExpander"] details {
+                background: var(--mf-card);
                 border-color: var(--mf-border) !important;
-                border-radius: 22px !important;
-                box-shadow: 0 16px 46px rgba(0, 0, 0, 0.28);
+                border-radius: var(--mf-radius) !important;
             }
 
             .stButton > button,
             .stDownloadButton > button {
-                background: linear-gradient(135deg, #1f2937, #111827);
-                border: 1px solid rgba(148, 163, 184, 0.24);
-                border-radius: 14px;
-                color: #f8fafc;
-                font-weight: 900;
-                transition: all 160ms ease;
+                border-radius: 10px;
+                font-weight: 600;
+                transition: border-color 140ms ease, box-shadow 140ms ease;
             }
 
             .stButton > button:hover,
             .stDownloadButton > button:hover {
-                border-color: rgba(239, 68, 68, 0.62);
-                box-shadow: 0 12px 32px rgba(239, 68, 68, 0.18);
-                color: #ffffff;
-                transform: translateY(-1px);
-            }
-
-            .stButton > button[kind="primary"] {
-                background: linear-gradient(135deg, #ef4444, #b91c1c);
-                border-color: rgba(248, 113, 113, 0.72);
-                color: white;
-            }
-
-            .stSelectbox div[data-baseweb="select"] > div,
-            .stTextInput input,
-            .stTextArea textarea,
-            .stNumberInput input,
-            .stMultiSelect div[data-baseweb="select"] > div {
-                background: rgba(2, 6, 23, 0.76);
-                border-color: rgba(148, 163, 184, 0.22);
-                border-radius: 14px;
-                color: #f8fafc;
+                border-color: rgba(239, 68, 68, 0.6);
             }
 
             .diagram-placeholder {
                 align-items: center;
                 aspect-ratio: 1 / 1;
-                background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.12));
-                border: 1px dashed rgba(239, 68, 68, 0.42);
-                border-radius: 18px;
+                background: var(--mf-accent-soft);
+                border: 1px dashed rgba(239, 68, 68, 0.4);
+                border-radius: 12px;
                 color: #cbd5e1;
                 display: flex;
                 flex-direction: column;
                 font-size: 0.72rem;
-                font-weight: 900;
+                font-weight: 700;
                 gap: 0.25rem;
                 justify-content: center;
                 min-height: 96px;
@@ -312,19 +312,19 @@ def inject_design_system() -> None:
             }
 
             .exercise-title {
-                color: #f8fafc;
-                font-size: 1.08rem;
-                font-weight: 950;
-                line-height: 1.16;
-                margin: 0 0 0.28rem;
+                color: var(--mf-text);
+                font-size: 1.05rem;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 0 0 0.25rem;
             }
 
             .exercise-category {
-                color: #94a3b8;
-                font-size: 0.76rem;
-                font-weight: 850;
+                color: var(--mf-muted);
+                font-size: 0.74rem;
+                font-weight: 600;
                 letter-spacing: 0.06em;
-                margin-bottom: 0.72rem;
+                margin-bottom: 0.7rem;
                 text-transform: uppercase;
             }
 
@@ -332,109 +332,121 @@ def inject_design_system() -> None:
             .workout-badge {
                 border-radius: 999px;
                 display: inline-flex;
-                font-size: 0.82rem;
-                font-weight: 950;
+                font-size: 0.8rem;
+                font-weight: 700;
                 line-height: 1.1;
-                padding: 0.45rem 0.7rem;
+                padding: 0.4rem 0.7rem;
             }
 
             .sets-reps-pill {
-                background: rgba(239, 68, 68, 0.14);
+                background: var(--mf-accent-soft);
                 border: 1px solid rgba(239, 68, 68, 0.36);
                 color: #fecaca;
             }
 
             .metric-card, .calendar-card, .saved-card {
-                background: linear-gradient(180deg, rgba(15, 23, 42, 0.86), rgba(2, 6, 23, 0.82));
+                background: var(--mf-card);
                 border: 1px solid var(--mf-border);
-                border-radius: 24px;
-                box-shadow: 0 16px 42px rgba(0, 0, 0, 0.26);
+                border-radius: var(--mf-radius);
                 padding: 1rem;
             }
 
             .metric-value {
                 color: #ffffff;
-                font-size: 2.25rem;
-                font-weight: 950;
-                letter-spacing: -0.05em;
+                font-size: 2.1rem;
+                font-weight: 800;
+                letter-spacing: -0.03em;
             }
 
             .metric-label, .calendar-empty-label {
-                color: #94a3b8;
-                font-size: 0.8rem;
-                font-weight: 850;
+                color: var(--mf-muted);
+                font-size: 0.74rem;
+                font-weight: 600;
+                letter-spacing: 0.05em;
                 text-transform: uppercase;
             }
 
-            .calendar-toolbar {
-                align-items: center;
-                display: flex;
-                justify-content: space-between;
-                margin: 0.5rem 0 1rem;
-            }
+            /* ---------- Scheduler calendar ---------- */
 
             .calendar-month-title {
                 color: #ffffff;
-                font-size: clamp(1.45rem, 3vw, 2.15rem);
-                font-weight: 950;
-                letter-spacing: -0.04em;
+                font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+                font-weight: 800;
+                letter-spacing: -0.02em;
                 margin: 0;
+                text-align: center;
             }
 
             .weekday-label {
-                color: #fca5a5;
-                font-size: 0.78rem;
-                font-weight: 950;
+                color: var(--mf-muted);
+                font-size: 0.74rem;
+                font-weight: 700;
                 letter-spacing: 0.1em;
-                padding-bottom: 0.45rem;
+                padding: 0.6rem 0 0.35rem;
                 text-align: center;
                 text-transform: uppercase;
             }
 
             .calendar-card {
-                min-height: 128px;
-                position: relative;
-                transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+                height: var(--mf-day-h);
+                overflow: hidden;
+                padding: 0.75rem;
+                transition: border-color 140ms ease;
             }
 
             .calendar-card.today {
-                border-color: rgba(245, 158, 11, 0.78);
-                box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.28), 0 18px 48px rgba(245, 158, 11, 0.1);
+                border-color: rgba(239, 68, 68, 0.65);
+                box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+            }
+
+            .calendar-card .workout-badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.55rem;
             }
 
             .calendar-day-number {
-                color: #f8fafc;
-                font-size: 1.1rem;
-                font-weight: 950;
+                color: var(--mf-text);
+                font-size: 1rem;
+                font-weight: 700;
             }
 
             .calendar-muted {
-                opacity: 0.34;
+                background: transparent;
+                border-style: dashed;
+                opacity: 0.35;
             }
 
-            .calendar-action .stButton > button {
-                margin-top: -3.15rem;
-                opacity: 0;
-                min-height: 128px;
+            /* Each day button (key schedule_day_*) is pulled up over its card
+               so the whole cell is clickable; hover shows a red outline. */
+            div[class*="st-key-schedule_day_"] {
+                margin-top: calc(-1 * var(--mf-day-h));
             }
 
-            .calendar-action .stButton > button:hover {
-                opacity: 0.08;
+            div[class*="st-key-schedule_day_"] button {
+                background: transparent;
+                border: 1px solid transparent;
+                border-radius: var(--mf-radius);
+                color: transparent;
+                height: var(--mf-day-h);
+                min-height: var(--mf-day-h);
+                width: 100%;
             }
 
-            .sidebar-caption {
-                color: #94a3b8;
-                font-size: 0.72rem;
-                font-weight: 800;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
+            div[class*="st-key-schedule_day_"] button:hover,
+            div[class*="st-key-schedule_day_"] button:focus-visible {
+                background: rgba(239, 68, 68, 0.06);
+                border-color: rgba(239, 68, 68, 0.6);
+            }
+
+            div[class*="st-key-schedule_day_"] button * {
+                color: transparent !important;
             }
 
             @media (max-width: 780px) {
+                :root { --mf-day-h: 92px; }
                 .block-container { padding: 1rem 0.85rem 2.5rem; }
-                .mf-masthead { border-radius: 22px; min-height: 82px; padding: 0.75rem; }
-                .calendar-card { min-height: 92px; padding: 0.7rem; }
-                .calendar-action .stButton > button { min-height: 92px; margin-top: -2.7rem; }
+                .mf-masthead { padding: 0.75rem; }
+                .calendar-card { padding: 0.6rem; }
             }
         </style>
         """,
@@ -444,18 +456,26 @@ def inject_design_system() -> None:
 
 def render_app_shell() -> str:
     """Render reusable sidebar and masthead, returning the selected page."""
+    all_nav_items = [*NAV_ITEMS, *UTILITY_NAV_ITEMS]
+    selected_index = min(st.session_state.get("nav_index", 0), len(all_nav_items) - 1)
+
     with st.sidebar:
         if ICON_LOGO_PATH.exists():
-            st.image(str(ICON_LOGO_PATH), width=96)
+            st.image(str(ICON_LOGO_PATH), width=72)
         st.markdown("<div class='sidebar-caption'>MarshallFit Command Center</div>", unsafe_allow_html=True)
-        st.markdown("---")
-        all_nav_items = [*NAV_ITEMS, *UTILITY_NAV_ITEMS]
-        nav_labels = [f"{icon}  {label}" for label, _, icon in all_nav_items]
-        page_index = min(st.session_state.get("nav_index", 0), len(nav_labels) - 1)
-        selected_label = st.radio("Navigation", nav_labels, index=page_index, label_visibility="collapsed")
-        selected_index = nav_labels.index(selected_label)
-        st.session_state.nav_index = selected_index
-        st.caption("Use the sidebar collapse control or mobile hamburger for compact navigation.")
+        for index, (label, _, icon) in enumerate(all_nav_items):
+            is_active = index == selected_index
+            if st.button(
+                label,
+                icon=icon,
+                key=f"nav_{index}",
+                type="primary" if is_active else "secondary",
+                use_container_width=True,
+            ) and not is_active:
+                st.session_state.nav_index = index
+                st.rerun()
+        st.divider()
+        st.page_link("pages/today.py", label="Today's Workout (TV)", icon=":material/tv:")
 
     if HORIZONTAL_LOGO_PATH.exists():
         encoded_logo = base64.b64encode(HORIZONTAL_LOGO_PATH.read_bytes()).decode("utf-8")
@@ -681,6 +701,13 @@ def render_workout_generator_page() -> None:
     )
 
 
+def format_display_date(iso_date: str, include_weekday: bool = False) -> str:
+    """Format an ISO date for display without ``%-d`` (unsupported on Windows)."""
+    parsed = datetime.fromisoformat(iso_date)
+    weekday = f"{parsed.strftime('%A')}, " if include_weekday else ""
+    return f"{weekday}{parsed.strftime('%B')} {parsed.day}, {parsed.year}"
+
+
 def date_key(year: int, month: int, day: int) -> str:
     """Format a calendar date key as YYYY-MM-DD."""
     return date(year, month, day).isoformat()
@@ -731,13 +758,11 @@ def render_calendar_cell(day: int, year: int, month: int, schedule: dict[str, An
         """,
         unsafe_allow_html=True,
     )
-    st.markdown("<div class='calendar-action'>", unsafe_allow_html=True)
     button_label = f"Edit {day}" if scheduled_workout else f"Schedule {day}"
     if st.button(button_label, key=f"schedule_day_{key}", use_container_width=True):
         st.session_state.scheduler_selected_date = key
         st.session_state.scheduler_view = "day"
         st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_scheduler_calendar() -> None:
@@ -779,7 +804,7 @@ def render_scheduler_day_view() -> None:
 
     schedule = load_schedule()
     existing_workout = schedule.get(selected_date, {})
-    readable_date = datetime.fromisoformat(selected_date).strftime("%A, %B %-d, %Y")
+    readable_date = format_display_date(selected_date, include_weekday=True)
 
     if st.button("← Back to calendar"):
         st.session_state.scheduler_view = "calendar"
@@ -896,7 +921,7 @@ def render_dashboard_page() -> None:
         for key in upcoming[:5]:
             workout = schedule[key]
             st.markdown(
-                f"<div class='saved-card'><strong>{datetime.fromisoformat(key).strftime('%B %-d, %Y')}</strong><br>{render_workout_badge(workout['workoutType'])}</div>",
+                f"<div class='saved-card'><strong>{format_display_date(key)}</strong><br>{render_workout_badge(workout['workoutType'])}</div>",
                 unsafe_allow_html=True,
             )
 
@@ -911,7 +936,7 @@ def render_saved_workouts_page() -> None:
 
     for key in sorted(schedule):
         workout = schedule[key]
-        with st.expander(f"{datetime.fromisoformat(key).strftime('%B %-d, %Y')} · {workout['workoutType']}", expanded=False):
+        with st.expander(f"{format_display_date(key)} · {workout['workoutType']}", expanded=False):
             st.markdown(render_workout_badge(workout["workoutType"]), unsafe_allow_html=True)
             render_dual_workout_columns(
                 workout.get("weightedExercises", []),
