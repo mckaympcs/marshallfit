@@ -165,6 +165,11 @@ def inject_design_system() -> None:
                 width: 100%;
             }
 
+            [data-testid="stSidebar"] .stButton > button > div,
+            [data-testid="stSidebar"] [data-testid="stPageLink"] a > span {
+                justify-content: flex-start;
+            }
+
             [data-testid="stSidebar"] .stButton > button:hover,
             [data-testid="stSidebar"] [data-testid="stPageLink"] a:hover {
                 background: rgba(248, 250, 252, 0.06);
@@ -177,6 +182,7 @@ def inject_design_system() -> None:
                 border-left: 3px solid var(--mf-accent);
                 border-radius: 4px 10px 10px 4px;
                 color: #ffffff;
+                padding-left: calc(0.8rem - 2px);
             }
 
             [data-testid="stSidebar"] .stButton > button:focus:not(:focus-visible) {
