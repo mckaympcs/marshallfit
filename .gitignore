@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Generated workouts (keep the folder, ignore its contents)
+output/*
+!output/.gitkeep
+
+# OS noise
+.DS_Store
+Thumbs.db
